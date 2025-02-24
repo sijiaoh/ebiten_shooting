@@ -12,6 +12,7 @@ import (
 type Enemy struct {
 	actors.ActorBase
 
+	Pos            utils.VectorFloat
 	speedPerSecond float64
 }
 

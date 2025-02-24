@@ -15,12 +15,14 @@ import (
 type PlayerActor struct {
 	actors.ActorBase
 
+	Pos            utils.VectorFloat
 	speedPerSecond float64
 }
 
 func NewPlayerActor() PlayerActor {
 	return PlayerActor{
 		ActorBase:      actors.NewActorBase(),
+		Pos:            utils.VectorFloat{},
 		speedPerSecond: 1,
 	}
 }

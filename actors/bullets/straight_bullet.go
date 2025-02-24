@@ -13,6 +13,7 @@ import (
 type StraightBullet struct {
 	actors.ActorBase
 
+	Pos       utils.VectorFloat
 	direction utils.VectorFloat
 	speed     float64
 }
@@ -20,10 +21,10 @@ type StraightBullet struct {
 func NewStraightBullet(pos utils.VectorFloat, direction utils.VectorFloat, speed float64) StraightBullet {
 	sb := StraightBullet{
 		ActorBase: actors.NewActorBase(),
+		Pos:       pos,
 		direction: direction,
 		speed:     speed,
 	}
-	sb.Pos = pos
 	return sb
 }
 

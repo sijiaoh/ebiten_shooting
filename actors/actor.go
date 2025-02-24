@@ -2,7 +2,6 @@ package actors
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type Actor interface {
@@ -16,24 +15,16 @@ type Actor interface {
 
 	IsInited() bool
 	EndInit()
-
 	IsAlive() bool
-	Die()
 }
 
 type ActorBase struct {
 	isInited bool
-
-	// 0以下になると死亡判定
-	Hp int
-
-	Pos utils.VectorFloat
 }
 
 func NewActorBase() ActorBase {
 	return ActorBase{
 		isInited: false,
-		Hp:       1,
 	}
 }
 
@@ -46,9 +37,5 @@ func (ub *ActorBase) EndInit() {
 }
 
 func (ub *ActorBase) IsAlive() bool {
-	return ub.Hp > 0
-}
-
-func (ub *ActorBase) Die() {
-	ub.Hp = 0
+	return true
 }

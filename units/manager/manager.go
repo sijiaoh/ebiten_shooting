@@ -1,15 +1,19 @@
-package units
+package manager
+
+import "github.com/sijiaoh/ebiten_shooting/units"
 
 type UnitManager struct {
-	units []Unit
+	units []units.Unit
 }
 
+var um = &UnitManager{}
+
 // OnDeadを確実に呼び出すためにもRemoveUnitは提供しない
-func (um *UnitManager) AddUnit(unit Unit) {
+func AddUnit(unit units.Unit) {
 	um.units = append(um.units, unit)
 }
 
-func (um *UnitManager) Update(unit Unit) {
+func Update(unit units.Unit) {
 	um.initUnits()
 
 	for _, unit := range um.units {
@@ -21,7 +25,7 @@ func (um *UnitManager) Update(unit Unit) {
 	um.removeDeadUnits()
 }
 
-func (um *UnitManager) Draw(unit Unit) {
+func Draw(unit units.Unit) {
 	for _, unit := range um.units {
 		unit.Draw()
 	}
@@ -37,7 +41,7 @@ func (um *UnitManager) initUnits() {
 }
 
 func (um *UnitManager) removeDeadUnits() {
-	var aliveUnits []Unit
+	var aliveUnits []units.Unit
 	for _, unit := range um.units {
 		if unit.IsAlive() {
 			aliveUnits = append(aliveUnits, unit)

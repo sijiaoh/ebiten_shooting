@@ -2,17 +2,17 @@ package manager
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/sijiaoh/ebiten_shooting/units"
+	"github.com/sijiaoh/ebiten_shooting/actors"
 )
 
 type ActorManager struct {
-	actors []units.Actor
+	actors []actors.Actor
 }
 
 var am = &ActorManager{}
 
-// OnDeadを確実に呼び出すためにもRemoveUnitは提供しない
-func AddActor(actor units.Actor) {
+// OnDeadを確実に呼び出すためにもRemoveActorは提供しない
+func AddActor(actor actors.Actor) {
 	am.actors = append(am.actors, actor)
 }
 
@@ -44,7 +44,7 @@ func (am *ActorManager) initActors() {
 }
 
 func (am *ActorManager) removeDeadActors() {
-	var aliveActors []units.Actor
+	var aliveActors []actors.Actor
 	for _, actor := range am.actors {
 		if actor.IsAlive() {
 			aliveActors = append(aliveActors, actor)

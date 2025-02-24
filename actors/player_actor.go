@@ -1,4 +1,4 @@
-package units
+package actors
 
 import (
 	"image/color"

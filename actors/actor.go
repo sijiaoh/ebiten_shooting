@@ -25,15 +25,15 @@ type ActorBase struct {
 	isInited bool
 
 	// 0以下になると死亡判定
-	hp int
+	Hp int
 
-	pos utils.VectorFloat
+	Pos utils.VectorFloat
 }
 
 func NewActorBase() ActorBase {
 	return ActorBase{
 		isInited: false,
-		hp:       1,
+		Hp:       1,
 	}
 }
 
@@ -46,9 +46,9 @@ func (ub *ActorBase) EndInit() {
 }
 
 func (ub *ActorBase) IsAlive() bool {
-	return ub.hp > 0
+	return ub.Hp > 0
 }
 
 func (ub *ActorBase) Die() {
-	ub.hp = 0
+	ub.Hp = 0
 }

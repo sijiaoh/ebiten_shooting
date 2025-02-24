@@ -46,11 +46,11 @@ func (pa *PlayerActor) Update() {
 		vec = vec.Mul(speed)
 	}
 
-	pa.pos = pa.pos.Add(vec)
+	pa.Pos = pa.Pos.Add(vec)
 }
 
 func (pa *PlayerActor) Draw(screen *ebiten.Image) {
-	screenPos := pa.pos.ToScreenPos()
+	screenPos := pa.Pos.ToScreenPos()
 	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), 10, color.White, false)
 }
 

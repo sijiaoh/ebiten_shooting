@@ -5,8 +5,8 @@ import (
 )
 
 type VectorFloat struct {
-	x float64
-	y float64
+	X float64
+	Y float64
 }
 
 func VectorFloatZero() VectorFloat {
@@ -14,23 +14,23 @@ func VectorFloatZero() VectorFloat {
 }
 
 func (vf *VectorFloat) Add(v VectorFloat) VectorFloat {
-	return VectorFloat{vf.x + v.x, vf.y + v.y}
+	return VectorFloat{vf.X + v.X, vf.Y + v.Y}
 }
 
 func (vf *VectorFloat) Sub(v VectorFloat) VectorFloat {
-	return VectorFloat{vf.x - v.x, vf.y - v.y}
+	return VectorFloat{vf.X - v.X, vf.Y - v.Y}
 }
 
 func (vf *VectorFloat) Mul(s float64) VectorFloat {
-	return VectorFloat{vf.x * s, vf.y * s}
+	return VectorFloat{vf.X * s, vf.Y * s}
 }
 
 func (vf *VectorFloat) Div(s float64) VectorFloat {
-	return VectorFloat{vf.x / s, vf.y / s}
+	return VectorFloat{vf.X / s, vf.Y / s}
 }
 
 func (vf *VectorFloat) LengthSquared() float64 {
-	return vf.x*vf.x + vf.y*vf.y
+	return vf.X*vf.X + vf.Y*vf.Y
 }
 
 func (vf *VectorFloat) Length() float64 {

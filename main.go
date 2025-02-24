@@ -8,6 +8,7 @@ import (
 
 func main() {
 	game := &Game{}
+	game.Init()
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
 	}

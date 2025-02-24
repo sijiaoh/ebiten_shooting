@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/sijiaoh/ebiten_shooting/actors"
-	actorManager "github.com/sijiaoh/ebiten_shooting/actors/manager"
 	"github.com/sijiaoh/ebiten_shooting/time"
 )
 
@@ -14,17 +13,17 @@ func (g *Game) Init() {
 	ebiten.SetWindowTitle("Hello, World!")
 
 	playerActor := actors.NewPlayerActor()
-	actorManager.AddActor(&playerActor)
+	actors.Actors.AddActor(&playerActor)
 }
 
 func (g *Game) Update() error {
 	time.Time.OnBeforeUpdate()
-	actorManager.Update()
+	actors.Actors.Update()
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	actorManager.Draw(screen)
+	actors.Actors.Draw(screen)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {

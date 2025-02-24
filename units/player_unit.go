@@ -9,23 +9,23 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
-type PlayerUnit struct {
-	UnitBase
+type PlayerActor struct {
+	ActorBase
 
 	speedPerSecond float64
 }
 
-func NewPlayerUnit() PlayerUnit {
-	return PlayerUnit{
-		UnitBase:       NewUnitBase(),
+func NewPlayerActor() PlayerActor {
+	return PlayerActor{
+		ActorBase:      NewActorBase(),
 		speedPerSecond: 1,
 	}
 }
 
-func (pu *PlayerUnit) Init() {
+func (pa *PlayerActor) Init() {
 }
 
-func (pu *PlayerUnit) Update() {
+func (pa *PlayerActor) Update() {
 	vec := utils.VectorFloat{}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
 		vec.Y -= 1
@@ -42,17 +42,17 @@ func (pu *PlayerUnit) Update() {
 
 	if vec.LengthSquared() > 0 {
 		vec = vec.Normalize()
-		speed := pu.speedPerSecond * time.Time.DeltaTime
+		speed := pa.speedPerSecond * time.Time.DeltaTime
 		vec = vec.Mul(speed)
 	}
 
-	pu.pos = pu.pos.Add(vec)
+	pa.pos = pa.pos.Add(vec)
 }
 
-func (pu *PlayerUnit) Draw(screen *ebiten.Image) {
-	screenPos := pu.pos.ToScreenPos()
+func (pa *PlayerActor) Draw(screen *ebiten.Image) {
+	screenPos := pa.pos.ToScreenPos()
 	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), 10, color.White, false)
 }
 
-func (pu *PlayerUnit) OnDead() {
+func (pa *PlayerActor) OnDead() {
 }

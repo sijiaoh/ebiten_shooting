@@ -5,14 +5,14 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
-type Unit interface {
+type Actor interface {
 	Init()
 	Update()
 	Draw(screen *ebiten.Image)
 
 	OnDead()
 
-	// 以下はUnitBaseに実装済み
+	// 以下はActorBaseに実装済み
 
 	IsInited() bool
 	EndInit()
@@ -21,7 +21,7 @@ type Unit interface {
 	Die()
 }
 
-type UnitBase struct {
+type ActorBase struct {
 	isInited bool
 
 	// 0以下になると死亡判定
@@ -30,25 +30,25 @@ type UnitBase struct {
 	pos utils.VectorFloat
 }
 
-func NewUnitBase() UnitBase {
-	return UnitBase{
+func NewActorBase() ActorBase {
+	return ActorBase{
 		isInited: false,
 		hp:       1,
 	}
 }
 
-func (ub *UnitBase) IsInited() bool {
+func (ub *ActorBase) IsInited() bool {
 	return ub.isInited
 }
 
-func (ub *UnitBase) EndInit() {
+func (ub *ActorBase) EndInit() {
 	ub.isInited = true
 }
 
-func (ub *UnitBase) IsAlive() bool {
+func (ub *ActorBase) IsAlive() bool {
 	return ub.hp > 0
 }
 
-func (ub *UnitBase) Die() {
+func (ub *ActorBase) Die() {
 	ub.hp = 0
 }

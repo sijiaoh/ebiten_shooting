@@ -5,52 +5,52 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/units"
 )
 
-type UnitManager struct {
-	units []units.Unit
+type ActorManager struct {
+	actors []units.Actor
 }
 
-var um = &UnitManager{}
+var am = &ActorManager{}
 
 // OnDeadを確実に呼び出すためにもRemoveUnitは提供しない
-func AddUnit(unit units.Unit) {
-	um.units = append(um.units, unit)
+func AddActor(actor units.Actor) {
+	am.actors = append(am.actors, actor)
 }
 
 func Update() {
-	um.initUnits()
+	am.initActors()
 
-	for _, unit := range um.units {
-		if unit.IsAlive() {
-			unit.Update()
+	for _, actor := range am.actors {
+		if actor.IsAlive() {
+			actor.Update()
 		}
 	}
 
-	um.removeDeadUnits()
+	am.removeDeadActors()
 }
 
 func Draw(screen *ebiten.Image) {
-	for _, unit := range um.units {
-		unit.Draw(screen)
+	for _, actor := range am.actors {
+		actor.Draw(screen)
 	}
 }
 
-func (um *UnitManager) initUnits() {
-	for _, unit := range um.units {
-		if unit.IsAlive() && !unit.IsInited() {
-			unit.Init()
-			unit.EndInit()
+func (am *ActorManager) initActors() {
+	for _, actor := range am.actors {
+		if actor.IsAlive() && !actor.IsInited() {
+			actor.Init()
+			actor.EndInit()
 		}
 	}
 }
 
-func (um *UnitManager) removeDeadUnits() {
-	var aliveUnits []units.Unit
-	for _, unit := range um.units {
-		if unit.IsAlive() {
-			aliveUnits = append(aliveUnits, unit)
+func (am *ActorManager) removeDeadActors() {
+	var aliveActors []units.Actor
+	for _, actor := range am.actors {
+		if actor.IsAlive() {
+			aliveActors = append(aliveActors, actor)
 		} else {
-			unit.OnDead()
+			actor.OnDead()
 		}
 	}
-	um.units = aliveUnits
+	am.actors = aliveActors
 }

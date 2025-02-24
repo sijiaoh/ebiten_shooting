@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/sijiaoh/ebiten_shooting/units"
 	unitManager "github.com/sijiaoh/ebiten_shooting/units/manager"
 )
 
@@ -11,6 +12,8 @@ type Game struct{}
 func (g *Game) Init() {
 	ebiten.SetWindowSize(640, 480)
 	ebiten.SetWindowTitle("Hello, World!")
+
+	unitManager.AddUnit(&units.PlayerUnit{})
 }
 
 func (g *Game) Update() error {
@@ -19,7 +22,7 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	unitManager.Draw()
+	unitManager.Draw(screen)
 	ebitenutil.DebugPrint(screen, "Hello, World!")
 }
 

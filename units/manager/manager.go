@@ -1,6 +1,9 @@
 package manager
 
-import "github.com/sijiaoh/ebiten_shooting/units"
+import (
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/sijiaoh/ebiten_shooting/units"
+)
 
 type UnitManager struct {
 	units []units.Unit
@@ -25,9 +28,9 @@ func Update() {
 	um.removeDeadUnits()
 }
 
-func Draw() {
+func Draw(screen *ebiten.Image) {
 	for _, unit := range um.units {
-		unit.Draw()
+		unit.Draw(screen)
 	}
 }
 

@@ -1,15 +1,24 @@
 package units
 
+import (
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/sijiaoh/ebiten_shooting/utils"
+)
+
 type Unit interface {
-	IsInited() bool
 	Init()
-	EndInit()
 	Update()
-	Draw()
+	Draw(screen *ebiten.Image)
+
+	OnDead()
+
+	// 以下はUnitBaseに実装済み
+
+	IsInited() bool
+	EndInit()
 
 	IsAlive() bool
 	Die()
-	OnDead()
 }
 
 type UnitBase struct {
@@ -17,6 +26,8 @@ type UnitBase struct {
 
 	// 0以下になると死亡判定
 	hp int
+
+	pos utils.VectorFloat
 }
 
 func (ub *UnitBase) NewUnitBase() {
@@ -28,7 +39,7 @@ func (ub *UnitBase) IsInited() bool {
 	return ub.isInited
 }
 
-func (ub *UnitBase) Endinit() {
+func (ub *UnitBase) EndInit() {
 	ub.isInited = true
 }
 

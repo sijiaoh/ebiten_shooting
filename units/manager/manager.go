@@ -13,7 +13,7 @@ func AddUnit(unit units.Unit) {
 	um.units = append(um.units, unit)
 }
 
-func Update(unit units.Unit) {
+func Update() {
 	um.initUnits()
 
 	for _, unit := range um.units {
@@ -25,7 +25,7 @@ func Update(unit units.Unit) {
 	um.removeDeadUnits()
 }
 
-func Draw(unit units.Unit) {
+func Draw() {
 	for _, unit := range um.units {
 		unit.Draw()
 	}

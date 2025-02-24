@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	unitManager "github.com/sijiaoh/ebiten_shooting/units/manager"
 )
 
 type Game struct{}
@@ -13,10 +14,12 @@ func (g *Game) Init() {
 }
 
 func (g *Game) Update() error {
+	unitManager.Update()
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	unitManager.Draw()
 	ebitenutil.DebugPrint(screen, "Hello, World!")
 }
 

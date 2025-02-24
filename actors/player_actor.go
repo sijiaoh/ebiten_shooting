@@ -50,8 +50,9 @@ func (pa *PlayerActor) Update() {
 }
 
 func (pa *PlayerActor) Draw(screen *ebiten.Image) {
+	size := 10
 	screenPos := pa.Pos.ToScreenPos()
-	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), 10, color.White, false)
+	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
 }
 
 func (pa *PlayerActor) OnDead() {

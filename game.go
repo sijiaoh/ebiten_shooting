@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/sijiaoh/ebiten_shooting/actors"
+	"github.com/sijiaoh/ebiten_shooting/actors/enemies"
 	"github.com/sijiaoh/ebiten_shooting/time"
 )
 
@@ -14,6 +15,9 @@ func (g *Game) Init() {
 
 	playerActor := actors.NewPlayerActor()
 	actors.Actors.AddActor(&playerActor)
+
+	enemy := enemies.NewEnemy()
+	actors.Actors.AddActor(&enemy)
 }
 
 func (g *Game) Update() error {

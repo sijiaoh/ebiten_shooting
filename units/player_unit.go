@@ -5,19 +5,20 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
+	"github.com/sijiaoh/ebiten_shooting/time"
 	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type PlayerUnit struct {
 	UnitBase
 
-	speed float64
+	speedPerSecond float64
 }
 
 func NewPlayerUnit() PlayerUnit {
 	return PlayerUnit{
-		UnitBase: NewUnitBase(),
-		speed:    0.3,
+		UnitBase:       NewUnitBase(),
+		speedPerSecond: 1,
 	}
 }
 
@@ -41,7 +42,8 @@ func (pu *PlayerUnit) Update() {
 
 	if vec.LengthSquared() > 0 {
 		vec = vec.Normalize()
-		vec = vec.Mul(pu.speed)
+		speed := pu.speedPerSecond * time.Time.DeltaTime
+		vec = vec.Mul(speed)
 	}
 
 	pu.pos = pu.pos.Add(vec)

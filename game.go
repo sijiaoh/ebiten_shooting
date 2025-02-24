@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/sijiaoh/ebiten_shooting/time"
 	"github.com/sijiaoh/ebiten_shooting/units"
 	unitManager "github.com/sijiaoh/ebiten_shooting/units/manager"
 )
@@ -17,6 +18,7 @@ func (g *Game) Init() {
 }
 
 func (g *Game) Update() error {
+	time.Time.OnBeforeUpdate()
 	unitManager.Update()
 	return nil
 }

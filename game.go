@@ -12,7 +12,8 @@ func (g *Game) Init() {
 	ebiten.SetWindowSize(640, 480)
 	ebiten.SetWindowTitle("Hello, World!")
 
-	unitManager.AddUnit(&units.PlayerUnit{})
+	playerUnit := units.NewPlayerUnit()
+	unitManager.AddUnit(&playerUnit)
 }
 
 func (g *Game) Update() error {

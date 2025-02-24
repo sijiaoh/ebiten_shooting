@@ -5,37 +5,51 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
+	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type PlayerUnit struct {
 	UnitBase
+
+	speed float64
 }
 
-func (pu *PlayerUnit) NewPlayerUnit() {
-	pu.NewUnitBase()
-	pu.hp = 3
+func NewPlayerUnit() PlayerUnit {
+	return PlayerUnit{
+		UnitBase: NewUnitBase(),
+		speed:    0.3,
+	}
 }
 
 func (pu *PlayerUnit) Init() {
 }
 
 func (pu *PlayerUnit) Update() {
+	vec := utils.VectorFloat{}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
-		pu.pos.Y -= 1
+		vec.Y -= 1
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowDown) || ebiten.IsKeyPressed(ebiten.KeyS) {
-		pu.pos.Y += 1
+		vec.Y += 1
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowLeft) || ebiten.IsKeyPressed(ebiten.KeyA) {
-		pu.pos.X -= 1
+		vec.X -= 1
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowRight) || ebiten.IsKeyPressed(ebiten.KeyD) {
-		pu.pos.X += 1
+		vec.X += 1
 	}
+
+	if vec.LengthSquared() > 0 {
+		vec = vec.Normalize()
+		vec = vec.Mul(pu.speed)
+	}
+
+	pu.pos = pu.pos.Add(vec)
 }
 
 func (pu *PlayerUnit) Draw(screen *ebiten.Image) {
-	vector.DrawFilledCircle(screen, float32(pu.pos.X), float32(pu.pos.Y), 10, color.White, false)
+	screenPos := pu.pos.ToScreenPos()
+	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), 10, color.White, false)
 }
 
 func (pu *PlayerUnit) OnDead() {

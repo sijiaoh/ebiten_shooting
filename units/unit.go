@@ -30,9 +30,11 @@ type UnitBase struct {
 	pos utils.VectorFloat
 }
 
-func (ub *UnitBase) NewUnitBase() {
-	ub.isInited = false
-	ub.hp = 1
+func NewUnitBase() UnitBase {
+	return UnitBase{
+		isInited: false,
+		hp:       1,
+	}
 }
 
 func (ub *UnitBase) IsInited() bool {
@@ -44,7 +46,7 @@ func (ub *UnitBase) EndInit() {
 }
 
 func (ub *UnitBase) IsAlive() bool {
-	return ub.hp <= 0
+	return ub.hp > 0
 }
 
 func (ub *UnitBase) Die() {

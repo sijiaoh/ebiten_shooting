@@ -40,3 +40,7 @@ func (vf *VectorFloat) Length() float64 {
 func (vf *VectorFloat) Normalize() VectorFloat {
 	return vf.Div(vf.Length())
 }
+
+func (vf *VectorFloat) ToScreenPos() VectorFloat {
+	return VectorFloat{vf.X * PixelsPerUnit, vf.Y * PixelsPerUnit}
+}

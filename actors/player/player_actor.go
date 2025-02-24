@@ -29,6 +29,20 @@ func (pa *PlayerActor) Init() {
 }
 
 func (pa *PlayerActor) Update() {
+	pa.move()
+	pa.shoot()
+}
+
+func (pa *PlayerActor) Draw(screen *ebiten.Image) {
+	size := 10
+	screenPos := pa.Pos.ToScreenPos()
+	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
+}
+
+func (pa *PlayerActor) OnDead() {
+}
+
+func (pa *PlayerActor) move() {
 	vec := utils.VectorFloat{}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
 		vec.Y -= 1
@@ -43,11 +57,6 @@ func (pa *PlayerActor) Update() {
 		vec.X += 1
 	}
 
-	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		b := bullets.NewStraightBullet(pa.Pos, utils.VectorFloat{X: 0, Y: -1}, 2)
-		actors.Actors.AddActor(&b)
-	}
-
 	if vec.LengthSquared() > 0 {
 		vec = vec.Normalize()
 		speed := pa.speedPerSecond * time.Time.DeltaTime
@@ -57,11 +66,9 @@ func (pa *PlayerActor) Update() {
 	pa.Pos = pa.Pos.Add(vec)
 }
 
-func (pa *PlayerActor) Draw(screen *ebiten.Image) {
-	size := 10
-	screenPos := pa.Pos.ToScreenPos()
-	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
-}
-
-func (pa *PlayerActor) OnDead() {
+func (pa *PlayerActor) shoot() {
+	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+		b := bullets.NewStraightBullet(pa.Pos, utils.VectorFloat{X: 0, Y: -1}, 2)
+		actors.Actors.AddActor(&b)
+	}
 }

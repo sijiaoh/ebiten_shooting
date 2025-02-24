@@ -13,6 +13,22 @@ func VectorFloatZero() VectorFloat {
 	return VectorFloat{0, 0}
 }
 
+func VectorFloatUp() VectorFloat {
+	return VectorFloat{0, -1}
+}
+
+func VectorFloatDown() VectorFloat {
+	return VectorFloat{0, 1}
+}
+
+func VectorFloatLeft() VectorFloat {
+	return VectorFloat{-1, 0}
+}
+
+func VectorFloatRight() VectorFloat {
+	return VectorFloat{1, 0}
+}
+
 func (vf *VectorFloat) Add(v VectorFloat) VectorFloat {
 	return VectorFloat{vf.X + v.X, vf.Y + v.Y}
 }

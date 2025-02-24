@@ -21,6 +21,10 @@ func (g *Game) Init() {
 }
 
 func (g *Game) Update() error {
+	if ebiten.IsKeyPressed(ebiten.KeyQ) {
+		return ebiten.Termination
+	}
+
 	time.Time.OnBeforeUpdate()
 	actors.Actors.Update()
 	return nil

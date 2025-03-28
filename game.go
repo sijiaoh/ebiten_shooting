@@ -6,12 +6,13 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/actors/enemies"
 	"github.com/sijiaoh/ebiten_shooting/actors/player"
 	"github.com/sijiaoh/ebiten_shooting/time"
+	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type Game struct{}
 
 func (g *Game) Init() {
-	ebiten.SetWindowSize(640, 480)
+	ebiten.SetWindowSize(utils.WindowWidth, utils.WindowHeight)
 	ebiten.SetWindowTitle("Hello, World!")
 
 	playerActor := player.NewPlayerActor()
@@ -36,5 +37,5 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return 320, 240
+	return utils.WindowWidth / 2, utils.WindowHeight / 2
 }

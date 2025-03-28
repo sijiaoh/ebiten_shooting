@@ -38,7 +38,7 @@ func (sb *StraightBullet) Update() {
 }
 
 func (sb *StraightBullet) Draw(screen *ebiten.Image) {
-	size := 2.0
+	size := 0.1 * camera.PixelsPerUnit
 	screenPos := camera.ToScreenPos(sb.Pos)
 	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2), color.RGBA{R: 255, G: 255, B: 0, A: 255}, false)
 }

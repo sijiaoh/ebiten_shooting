@@ -7,6 +7,7 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/actors/player"
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/time"
+	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type Game struct{}
@@ -16,9 +17,11 @@ func (g *Game) Init() {
 	ebiten.SetWindowTitle("Hello, World!")
 
 	playerActor := player.NewPlayerActor()
+	playerActor.Pos = camera.ToWorldPos(utils.VectorFloat{camera.ScreenWidth / 2, camera.ScreenHeight / 2})
 	actors.Actors.AddActor(&playerActor)
 
 	enemy := enemies.NewEnemy()
+	enemy.Pos = camera.ToWorldPos(utils.VectorFloat{camera.ScreenWidth / 2, 1 * camera.PixelsPerUnit})
 	actors.Actors.AddActor(&enemy)
 }
 

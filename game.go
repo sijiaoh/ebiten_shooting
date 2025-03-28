@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/sijiaoh/ebiten_shooting/actors"
+	"github.com/sijiaoh/ebiten_shooting/actors/enemies"
+	"github.com/sijiaoh/ebiten_shooting/actors/player"
 	"github.com/sijiaoh/ebiten_shooting/time"
 )
 
@@ -12,10 +14,10 @@ func (g *Game) Init() {
 	ebiten.SetWindowSize(640, 480)
 	ebiten.SetWindowTitle("Hello, World!")
 
-	playerActor := actors.NewPlayerActor()
+	playerActor := player.NewPlayerActor()
 	actors.Actors.AddActor(&playerActor)
 
-	enemy := actors.NewEnemy()
+	enemy := enemies.NewEnemy()
 	actors.Actors.AddActor(&enemy)
 }
 

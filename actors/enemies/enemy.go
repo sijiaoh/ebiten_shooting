@@ -1,15 +1,16 @@
-package actors
+package enemies
 
 import (
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
+	"github.com/sijiaoh/ebiten_shooting/actors"
 	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type Enemy struct {
-	ActorBase
+	actors.ActorBase
 
 	Pos            utils.VectorFloat
 	speedPerSecond float64
@@ -17,7 +18,7 @@ type Enemy struct {
 
 func NewEnemy() Enemy {
 	return Enemy{
-		ActorBase:      NewActorBase(),
+		ActorBase:      actors.NewActorBase(),
 		speedPerSecond: 1,
 	}
 }

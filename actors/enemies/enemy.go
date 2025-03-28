@@ -6,6 +6,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/sijiaoh/ebiten_shooting/actors"
+	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
@@ -31,7 +32,7 @@ func (e *Enemy) Update() {
 
 func (e *Enemy) Draw(screen *ebiten.Image) {
 	size := 10.0
-	screenPos := e.Pos.ToScreenPos()
+	screenPos := camera.ToScreenPos(e.Pos)
 	leftTop := screenPos.Add(utils.VectorFloat{X: -size / 2, Y: -size / 2})
 	vector.DrawFilledRect(screen, float32(leftTop.X), float32(leftTop.Y), float32(size), float32(size), color.White, false)
 }

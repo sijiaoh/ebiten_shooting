@@ -8,6 +8,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/sijiaoh/ebiten_shooting/actors"
 	"github.com/sijiaoh/ebiten_shooting/actors/bullets"
+	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/time"
 	"github.com/sijiaoh/ebiten_shooting/utils"
 )
@@ -37,7 +38,7 @@ func (pa *PlayerActor) Update() {
 
 func (pa *PlayerActor) Draw(screen *ebiten.Image) {
 	size := 10
-	screenPos := pa.Pos.ToScreenPos()
+	screenPos := camera.ToScreenPos(pa.Pos)
 	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
 }
 

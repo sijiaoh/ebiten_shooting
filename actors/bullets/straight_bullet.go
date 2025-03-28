@@ -6,6 +6,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/sijiaoh/ebiten_shooting/actors"
+	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/time"
 	"github.com/sijiaoh/ebiten_shooting/utils"
 )
@@ -38,7 +39,7 @@ func (sb *StraightBullet) Update() {
 
 func (sb *StraightBullet) Draw(screen *ebiten.Image) {
 	size := 2.0
-	screenPos := sb.Pos.ToScreenPos()
+	screenPos := camera.ToScreenPos(sb.Pos)
 	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2), color.RGBA{R: 255, G: 255, B: 0, A: 255}, false)
 }
 

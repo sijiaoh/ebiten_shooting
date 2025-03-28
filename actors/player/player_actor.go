@@ -24,7 +24,7 @@ func NewPlayerActor() PlayerActor {
 	return PlayerActor{
 		ActorBase:      actors.NewActorBase(),
 		Pos:            utils.VectorFloat{},
-		speedPerSecond: 1,
+		speedPerSecond: 2,
 	}
 }
 
@@ -71,7 +71,7 @@ func (pa *PlayerActor) move() {
 
 func (pa *PlayerActor) shoot() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		b := bullets.NewStraightBullet(pa.Pos, utils.VectorFloat{X: 0, Y: -1}, 2)
+		b := bullets.NewStraightBullet(pa.Pos, utils.VectorFloat{X: 0, Y: -1}, 5)
 		actors.Actors.AddActor(&b)
 	}
 }

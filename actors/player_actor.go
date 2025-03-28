@@ -1,4 +1,4 @@
-package player
+package actors
 
 import (
 	"image/color"
@@ -6,14 +6,12 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/vector"
-	"github.com/sijiaoh/ebiten_shooting/actors"
-	"github.com/sijiaoh/ebiten_shooting/actors/bullets"
 	"github.com/sijiaoh/ebiten_shooting/time"
 	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type PlayerActor struct {
-	actors.ActorBase
+	ActorBase
 
 	Pos            utils.VectorFloat
 	speedPerSecond float64
@@ -21,7 +19,7 @@ type PlayerActor struct {
 
 func NewPlayerActor() PlayerActor {
 	return PlayerActor{
-		ActorBase:      actors.NewActorBase(),
+		ActorBase:      NewActorBase(),
 		Pos:            utils.VectorFloat{},
 		speedPerSecond: 1,
 	}
@@ -70,7 +68,7 @@ func (pa *PlayerActor) move() {
 
 func (pa *PlayerActor) shoot() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		b := bullets.NewStraightBullet(pa.Pos, utils.VectorFloat{X: 0, Y: -1}, 2)
-		actors.Actors.AddActor(&b)
+		b := NewStraightBullet(pa.Pos, utils.VectorFloat{X: 0, Y: -1}, 2)
+		Actors.AddActor(&b)
 	}
 }

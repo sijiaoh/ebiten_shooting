@@ -4,18 +4,18 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-type ActorManager struct {
+type Actors struct {
 	actors []Actor
 }
 
-var Actors = &ActorManager{}
+var ActorManager = &Actors{}
 
 // OnDeadを確実に呼び出すためにもRemoveActorは提供しない
-func (am *ActorManager) AddActor(actor Actor) {
+func (am *Actors) AddActor(actor Actor) {
 	am.actors = append(am.actors, actor)
 }
 
-func (am *ActorManager) Update() {
+func (am *Actors) Update() {
 	am.initActors()
 
 	for _, actor := range am.actors {
@@ -27,13 +27,13 @@ func (am *ActorManager) Update() {
 	am.removeDeadActors()
 }
 
-func (am *ActorManager) Draw(screen *ebiten.Image) {
+func (am *Actors) Draw(screen *ebiten.Image) {
 	for _, actor := range am.actors {
 		actor.Draw(screen)
 	}
 }
 
-func (am *ActorManager) initActors() {
+func (am *Actors) initActors() {
 	for _, actor := range am.actors {
 		if actor.IsAlive() && !actor.IsInited() {
 			actor.Init()
@@ -42,7 +42,7 @@ func (am *ActorManager) initActors() {
 	}
 }
 
-func (am *ActorManager) removeDeadActors() {
+func (am *Actors) removeDeadActors() {
 	var aliveActors []Actor
 	for _, actor := range am.actors {
 		if actor.IsAlive() {

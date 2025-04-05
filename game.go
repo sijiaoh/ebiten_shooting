@@ -18,11 +18,11 @@ func (g *Game) Init() {
 
 	playerActor := player.NewPlayerActor()
 	playerActor.Pos = camera.ToWorldPos(utils.VectorFloat{camera.ScreenWidth / 2, camera.ScreenHeight / 2})
-	actors.Actors.AddActor(&playerActor)
+	actors.ActorManager.AddActor(&playerActor)
 
 	enemy := enemies.NewEnemy()
 	enemy.Pos = camera.ToWorldPos(utils.VectorFloat{camera.ScreenWidth / 2, 1 * camera.PixelsPerUnit})
-	actors.Actors.AddActor(&enemy)
+	actors.ActorManager.AddActor(&enemy)
 }
 
 func (g *Game) Update() error {
@@ -31,12 +31,12 @@ func (g *Game) Update() error {
 	}
 
 	time.Time.OnBeforeUpdate()
-	actors.Actors.Update()
+	actors.ActorManager.Update()
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	actors.Actors.Draw(screen)
+	actors.ActorManager.Draw(screen)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {

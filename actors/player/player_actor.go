@@ -63,7 +63,7 @@ func (pa *PlayerActor) move() {
 	if vec.LenSquared() > 0 {
 		vec = vec.Normalized()
 		speed := pa.speedPerSecond * time.Time.DeltaTime
-		vec = vec.Mul(gmath.Vec{speed, speed})
+		vec = vec.Mulf(speed)
 	}
 
 	pa.Pos = pa.Pos.Add(vec)

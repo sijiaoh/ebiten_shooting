@@ -34,7 +34,7 @@ func (sb *StraightBullet) Init() {
 
 func (sb *StraightBullet) Update() {
 	speed := sb.speed * time.Time.DeltaTime
-	sb.Pos = sb.Pos.Add(sb.direction.Mul(gmath.Vec{speed, speed}))
+	sb.Pos = sb.Pos.Add(sb.direction.Mulf(speed))
 }
 
 func (sb *StraightBullet) Draw(screen *ebiten.Image) {

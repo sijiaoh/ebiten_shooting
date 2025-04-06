@@ -6,24 +6,24 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/vector"
+	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/actors"
 	"github.com/sijiaoh/ebiten_shooting/actors/bullets"
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/time"
-	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type PlayerActor struct {
 	actors.ActorBase
 
-	Pos            utils.VectorFloat
+	Pos            gmath.Vec
 	speedPerSecond float64
 }
 
 func NewPlayerActor() PlayerActor {
 	return PlayerActor{
 		ActorBase:      actors.NewActorBase(),
-		Pos:            utils.VectorFloat{},
+		Pos:            gmath.Vec{},
 		speedPerSecond: 2,
 	}
 }
@@ -46,7 +46,7 @@ func (pa *PlayerActor) OnDead() {
 }
 
 func (pa *PlayerActor) move() {
-	vec := utils.VectorFloat{}
+	vec := gmath.Vec{}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
 		vec.Y -= 1
 	}
@@ -60,10 +60,10 @@ func (pa *PlayerActor) move() {
 		vec.X += 1
 	}
 
-	if vec.LengthSquared() > 0 {
-		vec = vec.Normalize()
+	if vec.LenSquared() > 0 {
+		vec = vec.Normalized()
 		speed := pa.speedPerSecond * time.Time.DeltaTime
-		vec = vec.Mul(speed)
+		vec = vec.Mul(gmath.Vec{speed, speed})
 	}
 
 	pa.Pos = pa.Pos.Add(vec)
@@ -71,7 +71,7 @@ func (pa *PlayerActor) move() {
 
 func (pa *PlayerActor) shoot() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		b := bullets.NewStraightBullet(pa.Pos, utils.VectorFloat{X: 0, Y: -1}, 5)
+		b := bullets.NewStraightBullet(pa.Pos, gmath.Vec{X: 0, Y: -1}, 5)
 		actors.ActorManager.AddActor(&b)
 	}
 }

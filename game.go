@@ -2,12 +2,12 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/actors"
 	"github.com/sijiaoh/ebiten_shooting/actors/enemies"
 	"github.com/sijiaoh/ebiten_shooting/actors/player"
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/time"
-	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type Game struct{}
@@ -17,11 +17,11 @@ func (g *Game) Init() {
 	ebiten.SetWindowTitle("Hello, World!")
 
 	playerActor := player.NewPlayerActor()
-	playerActor.Pos = camera.ToWorldPos(utils.VectorFloat{camera.ScreenWidth / 2, camera.ScreenHeight / 2})
+	playerActor.Pos = camera.ToWorldPos(gmath.Vec{camera.ScreenWidth / 2, camera.ScreenHeight / 2})
 	actors.ActorManager.AddActor(&playerActor)
 
 	enemy := enemies.NewEnemy()
-	enemy.Pos = camera.ToWorldPos(utils.VectorFloat{camera.ScreenWidth / 2, 1 * camera.PixelsPerUnit})
+	enemy.Pos = camera.ToWorldPos(gmath.Vec{camera.ScreenWidth / 2, 1 * camera.PixelsPerUnit})
 	actors.ActorManager.AddActor(&enemy)
 }
 

@@ -5,21 +5,21 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
+	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/actors"
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/time"
-	"github.com/sijiaoh/ebiten_shooting/utils"
 )
 
 type StraightBullet struct {
 	actors.ActorBase
 
-	Pos       utils.VectorFloat
-	direction utils.VectorFloat
+	Pos       gmath.Vec
+	direction gmath.Vec
 	speed     float64
 }
 
-func NewStraightBullet(pos utils.VectorFloat, direction utils.VectorFloat, speed float64) StraightBullet {
+func NewStraightBullet(pos gmath.Vec, direction gmath.Vec, speed float64) StraightBullet {
 	sb := StraightBullet{
 		ActorBase: actors.NewActorBase(),
 		Pos:       pos,
@@ -34,7 +34,7 @@ func (sb *StraightBullet) Init() {
 
 func (sb *StraightBullet) Update() {
 	speed := sb.speed * time.Time.DeltaTime
-	sb.Pos = sb.Pos.Add(sb.direction.Mul(speed))
+	sb.Pos = sb.Pos.Add(sb.direction.Mul(gmath.Vec{speed, speed}))
 }
 
 func (sb *StraightBullet) Draw(screen *ebiten.Image) {

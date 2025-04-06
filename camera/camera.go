@@ -1,6 +1,6 @@
 package camera
 
-import "github.com/sijiaoh/ebiten_shooting/utils"
+import "github.com/quasilyte/gmath"
 
 const (
 	PixelsPerUnit = 32
@@ -8,10 +8,10 @@ const (
 	ScreenHeight  = 480
 )
 
-func ToScreenPos(pos utils.VectorFloat) utils.VectorFloat {
-	return utils.VectorFloat{pos.X * PixelsPerUnit, pos.Y * PixelsPerUnit}
+func ToScreenPos(pos gmath.Vec) gmath.Vec {
+	return gmath.Vec{pos.X * PixelsPerUnit, pos.Y * PixelsPerUnit}
 }
 
-func ToWorldPos(pos utils.VectorFloat) utils.VectorFloat {
-	return utils.VectorFloat{pos.X / PixelsPerUnit, pos.Y / PixelsPerUnit}
+func ToWorldPos(pos gmath.Vec) gmath.Vec {
+	return gmath.Vec{pos.X / PixelsPerUnit, pos.Y / PixelsPerUnit}
 }

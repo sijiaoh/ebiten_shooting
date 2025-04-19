@@ -15,7 +15,7 @@ type SceneBase struct {
 	actors []actors.Actor
 }
 
-// OnDeadを確実に呼び出すためにもRemoveActorは提供しない
+// OnDisposedを確実に呼び出すためにもRemoveActorは提供しない
 func (sb *SceneBase) AddActor(actor actors.Actor) {
 	sb.actors = append(sb.actors, actor)
 }
@@ -24,7 +24,7 @@ func (sb *SceneBase) Update() {
 	sb.initActors()
 
 	for _, actor := range sb.actors {
-		if actor.IsAlive() {
+		if actor.IsActive() {
 			actor.Update()
 		}
 	}
@@ -40,7 +40,7 @@ func (sb *SceneBase) Draw(screen *ebiten.Image) {
 
 func (sb *SceneBase) initActors() {
 	for _, actor := range sb.actors {
-		if actor.IsAlive() && !actor.IsInited() {
+		if actor.IsActive() && !actor.IsInited() {
 			actor.Init()
 			actor.EndInit()
 		}
@@ -50,10 +50,10 @@ func (sb *SceneBase) initActors() {
 func (sb *SceneBase) removeDeadActors() {
 	var aliveActors []actors.Actor
 	for _, actor := range sb.actors {
-		if actor.IsAlive() {
+		if actor.IsActive() {
 			aliveActors = append(aliveActors, actor)
 		} else {
-			actor.OnDead()
+			actor.OnDisposed()
 		}
 	}
 	sb.actors = aliveActors

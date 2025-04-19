@@ -37,5 +37,5 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 	vector.DrawFilledRect(screen, float32(leftTop.X), float32(leftTop.Y), float32(size), float32(size), color.White, false)
 }
 
-func (e *Enemy) OnDead() {
+func (e *Enemy) OnDisposed() {
 }

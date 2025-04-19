@@ -43,7 +43,7 @@ func (pa *PlayerActor) Draw(screen *ebiten.Image) {
 	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
 }
 
-func (pa *PlayerActor) OnDead() {
+func (pa *PlayerActor) OnDisposed() {
 }
 
 func (pa *PlayerActor) move() {

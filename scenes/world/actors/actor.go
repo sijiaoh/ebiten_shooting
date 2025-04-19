@@ -33,7 +33,7 @@ import (
 * func (f *Foo) Draw(screen *ebiten.Image) {
 * }
 *
-* func (f *Foo) OnDead() {
+* func (f *Foo) OnDisposed() {
 * }
  */
 type Actor interface {
@@ -41,13 +41,13 @@ type Actor interface {
 	Init()
 	Update()
 	Draw(screen *ebiten.Image)
-	OnDead()
+	OnDisposed()
 
 	// 以下はActorBaseに実装済み
 
 	IsInited() bool
 	EndInit()
-	IsAlive() bool
+	IsActive() bool
 }
 
 type ActorBase struct {
@@ -68,6 +68,6 @@ func (ub *ActorBase) EndInit() {
 	ub.isInited = true
 }
 
-func (ub *ActorBase) IsAlive() bool {
+func (ub *ActorBase) IsActive() bool {
 	return true
 }

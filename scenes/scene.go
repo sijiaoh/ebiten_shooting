@@ -34,4 +34,5 @@ func (sb *SceneBase) Update() {
 func (sb *SceneBase) Draw(screen *ebiten.Image) {
 	sb.entityManager.Draw(&sb.drawerManager)
 	sb.drawerManager.Draw(screen)
+	sb.drawerManager.ClearDrawers()
 }

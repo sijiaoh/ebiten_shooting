@@ -18,6 +18,10 @@ func (dm *DrawerManager) AddDrawer(drawer Drawer) {
 	dm.drawers = append(dm.drawers, drawer)
 }
 
+func (dm *DrawerManager) ClearDrawers() {
+	dm.drawers = dm.drawers[:0]
+}
+
 func (dm *DrawerManager) Draw(screen *ebiten.Image) {
 	sort.SliceStable(dm.drawers, func(i, j int) bool {
 		if dm.drawers[i].Layer == dm.drawers[j].Layer {
@@ -29,6 +33,4 @@ func (dm *DrawerManager) Draw(screen *ebiten.Image) {
 	for _, drawer := range dm.drawers {
 		drawer.Draw(screen)
 	}
-
-	dm.drawers = dm.drawers[:0]
 }

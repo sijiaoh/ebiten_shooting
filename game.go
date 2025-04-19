@@ -5,7 +5,6 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/game"
 	"github.com/sijiaoh/ebiten_shooting/scenes/world"
-	"github.com/sijiaoh/ebiten_shooting/time"
 )
 
 type Game struct{}
@@ -22,7 +21,6 @@ func (g *Game) Update() error {
 		return ebiten.Termination
 	}
 
-	time.Time.OnBeforeUpdate()
 	game.C.Scene.Update()
 	return nil
 }

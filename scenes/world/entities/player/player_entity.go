@@ -8,10 +8,9 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
-	"github.com/sijiaoh/ebiten_shooting/game"
 	"github.com/sijiaoh/ebiten_shooting/entity"
+	"github.com/sijiaoh/ebiten_shooting/game"
 	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities/bullets"
-	"github.com/sijiaoh/ebiten_shooting/time"
 )
 
 type PlayerEntity struct {
@@ -32,8 +31,8 @@ func NewPlayerEntity() PlayerEntity {
 func (pe *PlayerEntity) Init() {
 }
 
-func (pe *PlayerEntity) Update() {
-	pe.move()
+func (pe *PlayerEntity) Update(delta float64) {
+	pe.move(delta)
 	pe.shoot()
 }
 
@@ -46,7 +45,7 @@ func (pe *PlayerEntity) Draw(screen *ebiten.Image) {
 func (pe *PlayerEntity) OnDisposed() {
 }
 
-func (pe *PlayerEntity) move() {
+func (pe *PlayerEntity) move(delta float64) {
 	vec := gmath.Vec{}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
 		vec.Y -= 1
@@ -63,7 +62,7 @@ func (pe *PlayerEntity) move() {
 
 	if vec.LenSquared() > 0 {
 		vec = vec.Normalized()
-		speed := pe.speedPerSecond * time.Time.DeltaTime
+		speed := pe.speedPerSecond * delta
 		vec = vec.Mulf(speed)
 	}
 

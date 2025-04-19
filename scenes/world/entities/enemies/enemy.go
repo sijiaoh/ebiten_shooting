@@ -19,7 +19,7 @@ type Enemy struct {
 
 func NewEnemy() Enemy {
 	return Enemy{
-		EntityBase:      entity.NewEntityBase(),
+		EntityBase:     entity.NewEntityBase(),
 		speedPerSecond: 1,
 	}
 }
@@ -27,7 +27,7 @@ func NewEnemy() Enemy {
 func (e *Enemy) Init() {
 }
 
-func (e *Enemy) Update() {
+func (e *Enemy) Update(delta float64) {
 }
 
 func (e *Enemy) Draw(screen *ebiten.Image) {

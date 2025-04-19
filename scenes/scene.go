@@ -26,7 +26,7 @@ func (sb *SceneBase) Update() {
 
 	for _, entity := range sb.entities {
 		if entity.IsActive() {
-			entity.Update()
+			entity.Update(1.0 / 60)
 		}
 	}
 

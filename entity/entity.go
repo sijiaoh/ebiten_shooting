@@ -27,7 +27,7 @@ import (
 * func (f *Foo) Init() {
 * }
 *
-* func (f *Foo) Update() {
+* func (f *Foo) Update(delta float64) {
 * }
 *
 * func (f *Foo) Draw(screen *ebiten.Image) {
@@ -39,7 +39,7 @@ import (
 type Entity interface {
 	// ライフサイクルメソッド
 	Init()
-	Update()
+	Update(delta float64)
 	Draw(screen *ebiten.Image)
 	OnDisposed()
 

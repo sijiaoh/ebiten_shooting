@@ -8,7 +8,6 @@ import (
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/entity"
-	"github.com/sijiaoh/ebiten_shooting/time"
 )
 
 type StraightBullet struct {
@@ -22,9 +21,9 @@ type StraightBullet struct {
 func NewStraightBullet(pos gmath.Vec, direction gmath.Vec, speed float64) StraightBullet {
 	sb := StraightBullet{
 		EntityBase: entity.NewEntityBase(),
-		Pos:       pos,
-		direction: direction,
-		speed:     speed,
+		Pos:        pos,
+		direction:  direction,
+		speed:      speed,
 	}
 	return sb
 }
@@ -32,8 +31,8 @@ func NewStraightBullet(pos gmath.Vec, direction gmath.Vec, speed float64) Straig
 func (sb *StraightBullet) Init() {
 }
 
-func (sb *StraightBullet) Update() {
-	speed := sb.speed * time.Time.DeltaTime
+func (sb *StraightBullet) Update(delta float64) {
+	speed := sb.speed * delta
 	sb.Pos = sb.Pos.Add(sb.direction.Mulf(speed))
 }
 

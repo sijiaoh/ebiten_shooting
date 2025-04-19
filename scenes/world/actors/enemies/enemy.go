@@ -6,8 +6,8 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/quasilyte/gmath"
-	"github.com/sijiaoh/ebiten_shooting/actors"
 	"github.com/sijiaoh/ebiten_shooting/camera"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors"
 )
 
 type Enemy struct {

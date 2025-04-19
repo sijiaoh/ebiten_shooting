@@ -3,10 +3,10 @@ package main
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/quasilyte/gmath"
-	"github.com/sijiaoh/ebiten_shooting/actors"
-	"github.com/sijiaoh/ebiten_shooting/actors/enemies"
-	"github.com/sijiaoh/ebiten_shooting/actors/player"
 	"github.com/sijiaoh/ebiten_shooting/camera"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors/enemies"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors/player"
 	"github.com/sijiaoh/ebiten_shooting/time"
 )
 

@@ -7,9 +7,9 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/quasilyte/gmath"
-	"github.com/sijiaoh/ebiten_shooting/actors"
-	"github.com/sijiaoh/ebiten_shooting/actors/bullets"
 	"github.com/sijiaoh/ebiten_shooting/camera"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors/bullets"
 	"github.com/sijiaoh/ebiten_shooting/time"
 )
 

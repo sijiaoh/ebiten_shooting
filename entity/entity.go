@@ -46,14 +46,23 @@ type Entity interface {
 	// 以下はEntityBaseに実装済み
 
 	IsActive() bool
+	Dispose()
 }
 
-type EntityBase struct{}
+type EntityBase struct {
+	isActive bool
+}
 
 func NewEntityBase() EntityBase {
-	return EntityBase{}
+	return EntityBase{
+		isActive: true,
+	}
 }
 
 func (eb *EntityBase) IsActive() bool {
-	return true
+	return eb.isActive
+}
+
+func (eb *EntityBase) Dispose() {
+	eb.isActive = false
 }

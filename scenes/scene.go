@@ -30,7 +30,7 @@ func (sb *SceneBase) Update() {
 		}
 	}
 
-	sb.removeDeadEntities()
+	sb.removeDisposedEntities()
 }
 
 func (sb *SceneBase) Draw(screen *ebiten.Image) {
@@ -47,7 +47,7 @@ func (sb *SceneBase) initEntities() {
 	sb.addedEntities = make([]entity.Entity, 0)
 }
 
-func (sb *SceneBase) removeDeadEntities() {
+func (sb *SceneBase) removeDisposedEntities() {
 	var aliveEntities []entity.Entity
 	for _, entity := range sb.entities {
 		if entity.IsActive() {

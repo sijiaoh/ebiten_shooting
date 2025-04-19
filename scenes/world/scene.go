@@ -13,7 +13,9 @@ type Scene struct {
 }
 
 func NewScene() scenes.Scene {
-	scene := Scene{}
+	scene := Scene{
+		SceneBase: scenes.NewSceneBase(),
+	}
 
 	playerEntity := player.NewPlayerEntity()
 	playerEntity.Pos = camera.ToWorldPos(gmath.Vec{camera.ScreenWidth / 2, camera.ScreenHeight / 2})

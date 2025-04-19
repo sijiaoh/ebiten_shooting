@@ -12,49 +12,23 @@ type Scene interface {
 }
 
 type SceneBase struct {
-	entities      []entity.Entity
-	addedEntities []entity.Entity
+	entityManager entity.EntityManager
 }
 
-// OnDisposedを確実に呼び出すためにもRemoveEntityは提供しない
+func NewSceneBase() SceneBase {
+	return SceneBase{
+		entityManager: entity.NewEntityManager(),
+	}
+}
+
 func (sb *SceneBase) AddEntity(entity entity.Entity) {
-	sb.addedEntities = append(sb.addedEntities, entity)
+	sb.entityManager.AddEntity(entity)
 }
 
 func (sb *SceneBase) Update() {
-	sb.initEntities()
-
-	for _, entity := range sb.entities {
-		if entity.IsActive() {
-			entity.Update(1.0 / 60 * entity.TimeScale())
-		}
-	}
-
-	sb.removeDisposedEntities()
+	sb.entityManager.Update()
 }
 
 func (sb *SceneBase) Draw(screen *ebiten.Image) {
-	for _, entity := range sb.entities {
-		entity.Draw(screen)
-	}
-}
-
-func (sb *SceneBase) initEntities() {
-	for _, entity := range sb.addedEntities {
-		entity.Init()
-	}
-	sb.entities = append(sb.entities, sb.addedEntities...)
-	sb.addedEntities = make([]entity.Entity, 0)
-}
-
-func (sb *SceneBase) removeDisposedEntities() {
-	var aliveEntities []entity.Entity
-	for _, entity := range sb.entities {
-		if entity.IsActive() {
-			aliveEntities = append(aliveEntities, entity)
-		} else {
-			entity.OnDisposed()
-		}
-	}
-	sb.entities = aliveEntities
+	sb.entityManager.Draw(screen)
 }

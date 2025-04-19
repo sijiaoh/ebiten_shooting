@@ -5,35 +5,41 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors"
 )
 
-type Scene struct {
+type Scene interface {
+	AddActor(actor actors.Actor)
+	Update()
+	Draw(screen *ebiten.Image)
+}
+
+type SceneBase struct {
 	actors []actors.Actor
 }
 
 // OnDeadを確実に呼び出すためにもRemoveActorは提供しない
-func (am *Scene) AddActor(actor actors.Actor) {
-	am.actors = append(am.actors, actor)
+func (sb *SceneBase) AddActor(actor actors.Actor) {
+	sb.actors = append(sb.actors, actor)
 }
 
-func (am *Scene) Update() {
-	am.initActors()
+func (sb *SceneBase) Update() {
+	sb.initActors()
 
-	for _, actor := range am.actors {
+	for _, actor := range sb.actors {
 		if actor.IsAlive() {
 			actor.Update()
 		}
 	}
 
-	am.removeDeadActors()
+	sb.removeDeadActors()
 }
 
-func (am *Scene) Draw(screen *ebiten.Image) {
-	for _, actor := range am.actors {
+func (sb *SceneBase) Draw(screen *ebiten.Image) {
+	for _, actor := range sb.actors {
 		actor.Draw(screen)
 	}
 }
 
-func (am *Scene) initActors() {
-	for _, actor := range am.actors {
+func (sb *SceneBase) initActors() {
+	for _, actor := range sb.actors {
 		if actor.IsAlive() && !actor.IsInited() {
 			actor.Init()
 			actor.EndInit()
@@ -41,14 +47,14 @@ func (am *Scene) initActors() {
 	}
 }
 
-func (am *Scene) removeDeadActors() {
+func (sb *SceneBase) removeDeadActors() {
 	var aliveActors []actors.Actor
-	for _, actor := range am.actors {
+	for _, actor := range sb.actors {
 		if actor.IsAlive() {
 			aliveActors = append(aliveActors, actor)
 		} else {
 			actor.OnDead()
 		}
 	}
-	am.actors = aliveActors
+	sb.actors = aliveActors
 }

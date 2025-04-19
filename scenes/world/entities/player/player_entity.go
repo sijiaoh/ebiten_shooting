@@ -37,7 +37,7 @@ func (pe *PlayerEntity) Update(delta float64) {
 }
 
 func (pe *PlayerEntity) Draw(dm *entity.DrawerManager) {
-	dm.AddDrawer(entity.Drawer{
+	dm.AddDrawer(&entity.Drawer{
 		Draw: func(screen *ebiten.Image) {
 			size := 0.5 * camera.PixelsPerUnit
 			screenPos := camera.ToScreenPos(pe.Pos)

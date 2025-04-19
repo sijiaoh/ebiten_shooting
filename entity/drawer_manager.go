@@ -7,14 +7,14 @@ import (
 )
 
 type DrawerManager struct {
-	drawers []Drawer
+	drawers []*Drawer
 }
 
-func NewDrawerManager() DrawerManager {
-	return DrawerManager{}
+func NewDrawerManager() *DrawerManager {
+	return &DrawerManager{}
 }
 
-func (dm *DrawerManager) AddDrawer(drawer Drawer) {
+func (dm *DrawerManager) AddDrawer(drawer *Drawer) {
 	dm.drawers = append(dm.drawers, drawer)
 }
 

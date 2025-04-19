@@ -31,7 +31,7 @@ func (e *Enemy) Update(delta float64) {
 }
 
 func (e *Enemy) Draw(dm *entity.DrawerManager) {
-	dm.AddDrawer(entity.Drawer{
+	dm.AddDrawer(&entity.Drawer{
 		Draw: func(screen *ebiten.Image) {
 			size := 0.5 * camera.PixelsPerUnit
 			screenPos := camera.ToScreenPos(e.Pos)

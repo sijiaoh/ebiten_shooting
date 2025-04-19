@@ -37,7 +37,7 @@ func (sb *StraightBullet) Update(delta float64) {
 }
 
 func (sb *StraightBullet) Draw(dm *entity.DrawerManager) {
-	dm.AddDrawer(entity.Drawer{
+	dm.AddDrawer(&entity.Drawer{
 		Draw: func(screen *ebiten.Image) {
 			size := 0.1 * camera.PixelsPerUnit
 			screenPos := camera.ToScreenPos(sb.Pos)

@@ -1,21 +1,20 @@
-package actors
+package scenes
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors"
 )
 
-type Actors struct {
-	actors []Actor
+type Scene struct {
+	actors []actors.Actor
 }
 
-var ActorManager = &Actors{}
-
 // OnDeadを確実に呼び出すためにもRemoveActorは提供しない
-func (am *Actors) AddActor(actor Actor) {
+func (am *Scene) AddActor(actor actors.Actor) {
 	am.actors = append(am.actors, actor)
 }
 
-func (am *Actors) Update() {
+func (am *Scene) Update() {
 	am.initActors()
 
 	for _, actor := range am.actors {
@@ -27,13 +26,13 @@ func (am *Actors) Update() {
 	am.removeDeadActors()
 }
 
-func (am *Actors) Draw(screen *ebiten.Image) {
+func (am *Scene) Draw(screen *ebiten.Image) {
 	for _, actor := range am.actors {
 		actor.Draw(screen)
 	}
 }
 
-func (am *Actors) initActors() {
+func (am *Scene) initActors() {
 	for _, actor := range am.actors {
 		if actor.IsAlive() && !actor.IsInited() {
 			actor.Init()
@@ -42,8 +41,8 @@ func (am *Actors) initActors() {
 	}
 }
 
-func (am *Actors) removeDeadActors() {
-	var aliveActors []Actor
+func (am *Scene) removeDeadActors() {
+	var aliveActors []actors.Actor
 	for _, actor := range am.actors {
 		if actor.IsAlive() {
 			aliveActors = append(aliveActors, actor)

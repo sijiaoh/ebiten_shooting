@@ -4,7 +4,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
-	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors"
+	"github.com/sijiaoh/ebiten_shooting/game"
 	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors/enemies"
 	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors/player"
 	"github.com/sijiaoh/ebiten_shooting/time"
@@ -18,11 +18,11 @@ func (g *Game) Init() {
 
 	playerActor := player.NewPlayerActor()
 	playerActor.Pos = camera.ToWorldPos(gmath.Vec{camera.ScreenWidth / 2, camera.ScreenHeight / 2})
-	actors.ActorManager.AddActor(&playerActor)
+	game.C.Scene.AddActor(&playerActor)
 
 	enemy := enemies.NewEnemy()
 	enemy.Pos = camera.ToWorldPos(gmath.Vec{camera.ScreenWidth / 2, 1 * camera.PixelsPerUnit})
-	actors.ActorManager.AddActor(&enemy)
+	game.C.Scene.AddActor(&enemy)
 }
 
 func (g *Game) Update() error {
@@ -31,12 +31,12 @@ func (g *Game) Update() error {
 	}
 
 	time.Time.OnBeforeUpdate()
-	actors.ActorManager.Update()
+	game.C.Scene.Update()
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	actors.ActorManager.Draw(screen)
+	game.C.Scene.Draw(screen)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {

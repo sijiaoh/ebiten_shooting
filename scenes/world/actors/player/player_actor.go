@@ -8,6 +8,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
+	"github.com/sijiaoh/ebiten_shooting/game"
 	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors"
 	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors/bullets"
 	"github.com/sijiaoh/ebiten_shooting/time"
@@ -72,6 +73,6 @@ func (pa *PlayerActor) move() {
 func (pa *PlayerActor) shoot() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 		b := bullets.NewStraightBullet(pa.Pos, gmath.Vec{X: 0, Y: -1}, 5)
-		actors.ActorManager.AddActor(&b)
+		game.C.Scene.AddActor(&b)
 	}
 }

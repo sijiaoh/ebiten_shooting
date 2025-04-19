@@ -2,59 +2,59 @@ package scenes
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities"
 )
 
 type Scene interface {
-	AddActor(actor actors.Actor)
+	AddEntity(entity entities.Entity)
 	Update()
 	Draw(screen *ebiten.Image)
 }
 
 type SceneBase struct {
-	actors []actors.Actor
+	entities []entities.Entity
 }
 
-// OnDisposedを確実に呼び出すためにもRemoveActorは提供しない
-func (sb *SceneBase) AddActor(actor actors.Actor) {
-	sb.actors = append(sb.actors, actor)
+// OnDisposedを確実に呼び出すためにもRemoveEntityは提供しない
+func (sb *SceneBase) AddEntity(entity entities.Entity) {
+	sb.entities = append(sb.entities, entity)
 }
 
 func (sb *SceneBase) Update() {
-	sb.initActors()
+	sb.initEntities()
 
-	for _, actor := range sb.actors {
-		if actor.IsActive() {
-			actor.Update()
+	for _, entity := range sb.entities {
+		if entity.IsActive() {
+			entity.Update()
 		}
 	}
 
-	sb.removeDeadActors()
+	sb.removeDeadEntities()
 }
 
 func (sb *SceneBase) Draw(screen *ebiten.Image) {
-	for _, actor := range sb.actors {
-		actor.Draw(screen)
+	for _, entity := range sb.entities {
+		entity.Draw(screen)
 	}
 }
 
-func (sb *SceneBase) initActors() {
-	for _, actor := range sb.actors {
-		if actor.IsActive() && !actor.IsInited() {
-			actor.Init()
-			actor.EndInit()
+func (sb *SceneBase) initEntities() {
+	for _, entity := range sb.entities {
+		if entity.IsActive() && !entity.IsInited() {
+			entity.Init()
+			entity.EndInit()
 		}
 	}
 }
 
-func (sb *SceneBase) removeDeadActors() {
-	var aliveActors []actors.Actor
-	for _, actor := range sb.actors {
-		if actor.IsActive() {
-			aliveActors = append(aliveActors, actor)
+func (sb *SceneBase) removeDeadEntities() {
+	var aliveEntities []entities.Entity
+	for _, entity := range sb.entities {
+		if entity.IsActive() {
+			aliveEntities = append(aliveEntities, entity)
 		} else {
-			actor.OnDisposed()
+			entity.OnDisposed()
 		}
 	}
-	sb.actors = aliveActors
+	sb.entities = aliveEntities
 }

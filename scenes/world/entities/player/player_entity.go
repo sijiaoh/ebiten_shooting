@@ -9,44 +9,44 @@ import (
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/game"
-	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors"
-	"github.com/sijiaoh/ebiten_shooting/scenes/world/actors/bullets"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities/bullets"
 	"github.com/sijiaoh/ebiten_shooting/time"
 )
 
-type PlayerActor struct {
-	actors.ActorBase
+type PlayerEntity struct {
+	entities.EntityBase
 
 	Pos            gmath.Vec
 	speedPerSecond float64
 }
 
-func NewPlayerActor() PlayerActor {
-	return PlayerActor{
-		ActorBase:      actors.NewActorBase(),
+func NewPlayerEntity() PlayerEntity {
+	return PlayerEntity{
+		EntityBase:     entities.NewEntityBase(),
 		Pos:            gmath.Vec{},
 		speedPerSecond: 2,
 	}
 }
 
-func (pa *PlayerActor) Init() {
+func (pe *PlayerEntity) Init() {
 }
 
-func (pa *PlayerActor) Update() {
-	pa.move()
-	pa.shoot()
+func (pe *PlayerEntity) Update() {
+	pe.move()
+	pe.shoot()
 }
 
-func (pa *PlayerActor) Draw(screen *ebiten.Image) {
+func (pe *PlayerEntity) Draw(screen *ebiten.Image) {
 	size := 0.5 * camera.PixelsPerUnit
-	screenPos := camera.ToScreenPos(pa.Pos)
+	screenPos := camera.ToScreenPos(pe.Pos)
 	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
 }
 
-func (pa *PlayerActor) OnDisposed() {
+func (pe *PlayerEntity) OnDisposed() {
 }
 
-func (pa *PlayerActor) move() {
+func (pe *PlayerEntity) move() {
 	vec := gmath.Vec{}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
 		vec.Y -= 1
@@ -63,16 +63,16 @@ func (pa *PlayerActor) move() {
 
 	if vec.LenSquared() > 0 {
 		vec = vec.Normalized()
-		speed := pa.speedPerSecond * time.Time.DeltaTime
+		speed := pe.speedPerSecond * time.Time.DeltaTime
 		vec = vec.Mulf(speed)
 	}
 
-	pa.Pos = pa.Pos.Add(vec)
+	pe.Pos = pe.Pos.Add(vec)
 }
 
-func (pa *PlayerActor) shoot() {
+func (pe *PlayerEntity) shoot() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		b := bullets.NewStraightBullet(pa.Pos, gmath.Vec{X: 0, Y: -1}, 5)
-		game.C.Scene.AddActor(&b)
+		b := bullets.NewStraightBullet(pe.Pos, gmath.Vec{X: 0, Y: -1}, 5)
+		game.C.Scene.AddEntity(&b)
 	}
 }

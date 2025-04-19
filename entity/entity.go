@@ -45,27 +45,13 @@ type Entity interface {
 
 	// 以下はEntityBaseに実装済み
 
-	IsInited() bool
-	EndInit()
 	IsActive() bool
 }
 
-type EntityBase struct {
-	isInited bool
-}
+type EntityBase struct{}
 
 func NewEntityBase() EntityBase {
-	return EntityBase{
-		isInited: false,
-	}
-}
-
-func (eb *EntityBase) IsInited() bool {
-	return eb.isInited
-}
-
-func (eb *EntityBase) EndInit() {
-	eb.isInited = true
+	return EntityBase{}
 }
 
 func (eb *EntityBase) IsActive() bool {

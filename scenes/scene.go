@@ -12,12 +12,13 @@ type Scene interface {
 }
 
 type SceneBase struct {
-	entities []entity.Entity
+	entities      []entity.Entity
+	addedEntities []entity.Entity
 }
 
 // OnDisposedを確実に呼び出すためにもRemoveEntityは提供しない
 func (sb *SceneBase) AddEntity(entity entity.Entity) {
-	sb.entities = append(sb.entities, entity)
+	sb.addedEntities = append(sb.addedEntities, entity)
 }
 
 func (sb *SceneBase) Update() {
@@ -39,12 +40,11 @@ func (sb *SceneBase) Draw(screen *ebiten.Image) {
 }
 
 func (sb *SceneBase) initEntities() {
-	for _, entity := range sb.entities {
-		if entity.IsActive() && !entity.IsInited() {
-			entity.Init()
-			entity.EndInit()
-		}
+	for _, entity := range sb.addedEntities {
+		entity.Init()
 	}
+	sb.entities = append(sb.entities, sb.addedEntities...)
+	sb.addedEntities = make([]entity.Entity, 0)
 }
 
 func (sb *SceneBase) removeDeadEntities() {

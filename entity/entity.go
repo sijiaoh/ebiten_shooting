@@ -47,15 +47,18 @@ type Entity interface {
 
 	IsActive() bool
 	Dispose()
+	TimeScale() float64
 }
 
 type EntityBase struct {
-	isActive bool
+	isActive  bool
+	timeScale float64
 }
 
 func NewEntityBase() EntityBase {
 	return EntityBase{
-		isActive: true,
+		isActive:  true,
+		timeScale: 1,
 	}
 }
 
@@ -65,4 +68,8 @@ func (eb *EntityBase) IsActive() bool {
 
 func (eb *EntityBase) Dispose() {
 	eb.isActive = false
+}
+
+func (eb *EntityBase) TimeScale() float64 {
+	return eb.timeScale
 }

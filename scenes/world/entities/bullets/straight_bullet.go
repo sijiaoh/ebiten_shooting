@@ -7,12 +7,12 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
-	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities"
+	"github.com/sijiaoh/ebiten_shooting/entity"
 	"github.com/sijiaoh/ebiten_shooting/time"
 )
 
 type StraightBullet struct {
-	entities.EntityBase
+	entity.EntityBase
 
 	Pos       gmath.Vec
 	direction gmath.Vec
@@ -21,7 +21,7 @@ type StraightBullet struct {
 
 func NewStraightBullet(pos gmath.Vec, direction gmath.Vec, speed float64) StraightBullet {
 	sb := StraightBullet{
-		EntityBase: entities.NewEntityBase(),
+		EntityBase: entity.NewEntityBase(),
 		Pos:       pos,
 		direction: direction,
 		speed:     speed,

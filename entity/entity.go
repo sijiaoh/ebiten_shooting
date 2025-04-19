@@ -1,4 +1,4 @@
-package entities
+package entity
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
@@ -11,16 +11,16 @@ import (
 *
 * import (
 * 	"github.com/hajimehoshi/ebiten/v2"
-* 	"github.com/sijiaoh/ebiten_shooting/entities"
+* 	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities"
 * )
 *
 * type Foo struct {
-* 	entities.EntityBase
+* 	entity.EntityBase
 * }
 *
 * func NewFoo() Foo {
 * 	return Foo{
-* 		EntityBase: entities.NewEntityBase(),
+* 		EntityBase: entity.NewEntityBase(),
 * 	}
 * }
 *

@@ -9,13 +9,13 @@ import (
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/game"
-	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities"
+	"github.com/sijiaoh/ebiten_shooting/entity"
 	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities/bullets"
 	"github.com/sijiaoh/ebiten_shooting/time"
 )
 
 type PlayerEntity struct {
-	entities.EntityBase
+	entity.EntityBase
 
 	Pos            gmath.Vec
 	speedPerSecond float64
@@ -23,7 +23,7 @@ type PlayerEntity struct {
 
 func NewPlayerEntity() PlayerEntity {
 	return PlayerEntity{
-		EntityBase:     entities.NewEntityBase(),
+		EntityBase:     entity.NewEntityBase(),
 		Pos:            gmath.Vec{},
 		speedPerSecond: 2,
 	}

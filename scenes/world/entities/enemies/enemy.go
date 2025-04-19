@@ -7,11 +7,11 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
-	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities"
+	"github.com/sijiaoh/ebiten_shooting/entity"
 )
 
 type Enemy struct {
-	entities.EntityBase
+	entity.EntityBase
 
 	Pos            gmath.Vec
 	speedPerSecond float64
@@ -19,7 +19,7 @@ type Enemy struct {
 
 func NewEnemy() Enemy {
 	return Enemy{
-		EntityBase:      entities.NewEntityBase(),
+		EntityBase:      entity.NewEntityBase(),
 		speedPerSecond: 1,
 	}
 }

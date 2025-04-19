@@ -2,21 +2,21 @@ package scenes
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities"
+	"github.com/sijiaoh/ebiten_shooting/entity"
 )
 
 type Scene interface {
-	AddEntity(entity entities.Entity)
+	AddEntity(entity entity.Entity)
 	Update()
 	Draw(screen *ebiten.Image)
 }
 
 type SceneBase struct {
-	entities []entities.Entity
+	entities []entity.Entity
 }
 
 // OnDisposedを確実に呼び出すためにもRemoveEntityは提供しない
-func (sb *SceneBase) AddEntity(entity entities.Entity) {
+func (sb *SceneBase) AddEntity(entity entity.Entity) {
 	sb.entities = append(sb.entities, entity)
 }
 
@@ -48,7 +48,7 @@ func (sb *SceneBase) initEntities() {
 }
 
 func (sb *SceneBase) removeDeadEntities() {
-	var aliveEntities []entities.Entity
+	var aliveEntities []entity.Entity
 	for _, entity := range sb.entities {
 		if entity.IsActive() {
 			aliveEntities = append(aliveEntities, entity)

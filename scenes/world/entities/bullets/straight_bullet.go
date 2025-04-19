@@ -36,10 +36,14 @@ func (sb *StraightBullet) Update(delta float64) {
 	sb.Pos = sb.Pos.Add(sb.direction.Mulf(speed))
 }
 
-func (sb *StraightBullet) Draw(screen *ebiten.Image) {
-	size := 0.1 * camera.PixelsPerUnit
-	screenPos := camera.ToScreenPos(sb.Pos)
-	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2), color.RGBA{R: 255, G: 255, B: 0, A: 255}, false)
+func (sb *StraightBullet) Draw(dm *entity.DrawerManager) {
+	dm.AddDrawer(entity.Drawer{
+		Draw: func(screen *ebiten.Image) {
+			size := 0.1 * camera.PixelsPerUnit
+			screenPos := camera.ToScreenPos(sb.Pos)
+			vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2), color.RGBA{R: 255, G: 255, B: 0, A: 255}, false)
+		},
+	})
 }
 
 func (sb *StraightBullet) OnDisposed() {

@@ -30,11 +30,15 @@ func (e *Enemy) Init() {
 func (e *Enemy) Update(delta float64) {
 }
 
-func (e *Enemy) Draw(screen *ebiten.Image) {
-	size := 0.5 * camera.PixelsPerUnit
-	screenPos := camera.ToScreenPos(e.Pos)
-	leftTop := screenPos.Add(gmath.Vec{X: -size / 2, Y: -size / 2})
-	vector.DrawFilledRect(screen, float32(leftTop.X), float32(leftTop.Y), float32(size), float32(size), color.White, false)
+func (e *Enemy) Draw(dm *entity.DrawerManager) {
+	dm.AddDrawer(entity.Drawer{
+		Draw: func(screen *ebiten.Image) {
+			size := 0.5 * camera.PixelsPerUnit
+			screenPos := camera.ToScreenPos(e.Pos)
+			leftTop := screenPos.Add(gmath.Vec{X: -size / 2, Y: -size / 2})
+			vector.DrawFilledRect(screen, float32(leftTop.X), float32(leftTop.Y), float32(size), float32(size), color.RGBA{255, 0, 0, 255}, false)
+		},
+	})
 }
 
 func (e *Enemy) OnDisposed() {

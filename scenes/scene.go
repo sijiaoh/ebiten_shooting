@@ -13,11 +13,13 @@ type Scene interface {
 
 type SceneBase struct {
 	entityManager entity.EntityManager
+	drawerManager entity.DrawerManager
 }
 
 func NewSceneBase() SceneBase {
 	return SceneBase{
 		entityManager: entity.NewEntityManager(),
+		drawerManager: entity.NewDrawerManager(),
 	}
 }
 
@@ -30,5 +32,6 @@ func (sb *SceneBase) Update() {
 }
 
 func (sb *SceneBase) Draw(screen *ebiten.Image) {
-	sb.entityManager.Draw(screen)
+	sb.entityManager.Draw(&sb.drawerManager)
+	sb.drawerManager.Draw(screen)
 }

@@ -1,9 +1,5 @@
 package entity
 
-import (
-	"github.com/hajimehoshi/ebiten/v2"
-)
-
 type EntityManager struct {
 	entities      []Entity
 	addedEntities []Entity
@@ -29,9 +25,9 @@ func (em *EntityManager) Update() {
 	em.removeDisposedEntities()
 }
 
-func (em *EntityManager) Draw(screen *ebiten.Image) {
+func (em *EntityManager) Draw(dm *DrawerManager) {
 	for _, entity := range em.entities {
-		entity.Draw(screen)
+		entity.Draw(dm)
 	}
 }
 

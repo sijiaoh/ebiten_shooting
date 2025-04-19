@@ -36,10 +36,14 @@ func (pe *PlayerEntity) Update(delta float64) {
 	pe.shoot()
 }
 
-func (pe *PlayerEntity) Draw(screen *ebiten.Image) {
-	size := 0.5 * camera.PixelsPerUnit
-	screenPos := camera.ToScreenPos(pe.Pos)
-	vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
+func (pe *PlayerEntity) Draw(dm *entity.DrawerManager) {
+	dm.AddDrawer(entity.Drawer{
+		Draw: func(screen *ebiten.Image) {
+			size := 0.5 * camera.PixelsPerUnit
+			screenPos := camera.ToScreenPos(pe.Pos)
+			vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
+		},
+	})
 }
 
 func (pe *PlayerEntity) OnDisposed() {

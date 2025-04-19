@@ -1,9 +1,5 @@
 package entity
 
-import (
-	"github.com/hajimehoshi/ebiten/v2"
-)
-
 /*
 * テンプレート
 *
@@ -30,7 +26,7 @@ import (
 * func (f *Foo) Update(delta float64) {
 * }
 *
-* func (f *Foo) Draw(screen *ebiten.Image) {
+* func (f *Foo) Draw(dm *DrawerManager) {
 * }
 *
 * func (f *Foo) OnDisposed() {
@@ -40,7 +36,7 @@ type Entity interface {
 	// ライフサイクルメソッド
 	Init()
 	Update(delta float64)
-	Draw(screen *ebiten.Image)
+	Draw(drawManager *DrawerManager)
 	OnDisposed()
 
 	// 以下はEntityBaseに実装済み

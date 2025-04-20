@@ -12,7 +12,7 @@ type Scene interface {
 }
 
 type SceneBase struct {
-	entityManager entity.EntityManager
+	entityManager *entity.EntityManager
 	drawerManager *entity.DrawerManager
 }
 

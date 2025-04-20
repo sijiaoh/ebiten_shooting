@@ -5,8 +5,8 @@ type EntityManager struct {
 	addedEntities []Entity
 }
 
-func NewEntityManager() EntityManager {
-	return EntityManager{}
+func NewEntityManager() *EntityManager {
+	return &EntityManager{}
 }
 
 func (em *EntityManager) AddEntity(entity Entity) {

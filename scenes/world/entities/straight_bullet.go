@@ -1,4 +1,4 @@
-package bullets
+package entities
 
 import (
 	"image/color"

@@ -1,4 +1,4 @@
-package player
+package entities
 
 import (
 	"image/color"
@@ -10,7 +10,6 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/core"
 	"github.com/sijiaoh/ebiten_shooting/game"
-	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities/bullets"
 )
 
 type PlayerEntity struct {
@@ -78,7 +77,7 @@ func (pe *PlayerEntity) move(delta float64) {
 
 func (pe *PlayerEntity) shoot() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		b := bullets.NewStraightBullet(pe.Pos, gmath.Vec{X: 0, Y: -1}, 5)
+		b := NewStraightBullet(pe.Pos, gmath.Vec{X: 0, Y: -1}, 5)
 		game.C.Scene.AddEntity(b)
 	}
 }

@@ -50,6 +50,9 @@ type Entity interface {
 	TimeScale() float64
 	SetTimeScale(scale float64)
 
+	getIsInited() bool
+	setIsInited(isInited bool)
+
 	AddComponent(component Component)
 	updateComponents(delta float64)
 	drawComponents(drawManager *DrawerManager)
@@ -59,6 +62,7 @@ type Entity interface {
 type EntityBase struct {
 	isActive         bool
 	timeScale        float64
+	isInited         bool
 	componentManager componentManager
 }
 
@@ -84,6 +88,14 @@ func (eb *EntityBase) TimeScale() float64 {
 
 func (eb *EntityBase) SetTimeScale(scale float64) {
 	eb.timeScale = scale
+}
+
+func (eb *EntityBase) getIsInited() bool {
+	return eb.isInited
+}
+
+func (eb *EntityBase) setIsInited(isInited bool) {
+	eb.isInited = isInited
 }
 
 func (eb *EntityBase) AddComponent(component Component) {

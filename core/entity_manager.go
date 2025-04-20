@@ -1,8 +1,7 @@
 package core
 
 type entityManager struct {
-	entities      []Entity
-	addedEntities []Entity
+	entities []Entity
 }
 
 func newEntityManager() *entityManager {
@@ -10,7 +9,7 @@ func newEntityManager() *entityManager {
 }
 
 func (em *entityManager) addEntity(entity Entity) {
-	em.addedEntities = append(em.addedEntities, entity)
+	em.entities = append(em.entities, entity)
 	entity.Awake()
 }
 
@@ -36,11 +35,12 @@ func (em *entityManager) draw(dm *DrawerManager) {
 }
 
 func (em *entityManager) initEntities() {
-	for _, entity := range em.addedEntities {
-		entity.Init()
+	for _, entity := range em.entities {
+		if !entity.getIsInited() {
+			entity.Init()
+			entity.setIsInited(true)
+		}
 	}
-	em.entities = append(em.entities, em.addedEntities...)
-	em.addedEntities = make([]Entity, 0)
 }
 
 func (em *entityManager) removeDisposedEntities() {

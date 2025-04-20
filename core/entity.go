@@ -7,16 +7,16 @@ package core
 *
 * import (
 * 	"github.com/hajimehoshi/ebiten/v2"
-* 	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities"
+* 	"github.com/sijiaoh/ebiten_shooting/core"
 * )
 *
 * type Foo struct {
-* 	entity.EntityBase
+* 	core.EntityBase
 * }
 *
 * func NewFoo() *Foo {
 * 	return &Foo{
-* 		EntityBase: *entity.NewEntityBase(),
+* 		EntityBase: *core.NewEntityBase(),
 * 	}
 * }
 *

@@ -20,9 +20,9 @@ type PlayerEntity struct {
 	speedPerSecond float64
 }
 
-func NewPlayerEntity() PlayerEntity {
-	return PlayerEntity{
-		EntityBase:     entity.NewEntityBase(),
+func NewPlayerEntity() *PlayerEntity {
+	return &PlayerEntity{
+		EntityBase:     *entity.NewEntityBase(),
 		Pos:            gmath.Vec{},
 		speedPerSecond: 2,
 	}
@@ -76,6 +76,6 @@ func (pe *PlayerEntity) move(delta float64) {
 func (pe *PlayerEntity) shoot() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 		b := bullets.NewStraightBullet(pe.Pos, gmath.Vec{X: 0, Y: -1}, 5)
-		game.C.Scene.AddEntity(&b)
+		game.C.Scene.AddEntity(b)
 	}
 }

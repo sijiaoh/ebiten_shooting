@@ -17,9 +17,9 @@ type Enemy struct {
 	speedPerSecond float64
 }
 
-func NewEnemy() Enemy {
-	return Enemy{
-		EntityBase:     entity.NewEntityBase(),
+func NewEnemy() *Enemy {
+	return &Enemy{
+		EntityBase:     *entity.NewEntityBase(),
 		speedPerSecond: 1,
 	}
 }

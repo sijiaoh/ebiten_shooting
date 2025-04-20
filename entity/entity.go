@@ -14,9 +14,9 @@ package entity
 * 	entity.EntityBase
 * }
 *
-* func NewFoo() Foo {
-* 	return Foo{
-* 		EntityBase: entity.NewEntityBase(),
+* func NewFoo() *Foo {
+* 	return &Foo{
+* 		EntityBase: *entity.NewEntityBase(),
 * 	}
 * }
 *
@@ -51,8 +51,8 @@ type EntityBase struct {
 	timeScale float64
 }
 
-func NewEntityBase() EntityBase {
-	return EntityBase{
+func NewEntityBase() *EntityBase {
+	return &EntityBase{
 		isActive:  true,
 		timeScale: 1,
 	}

@@ -18,9 +18,9 @@ type StraightBullet struct {
 	speed     float64
 }
 
-func NewStraightBullet(pos gmath.Vec, direction gmath.Vec, speed float64) StraightBullet {
-	sb := StraightBullet{
-		EntityBase: entity.NewEntityBase(),
+func NewStraightBullet(pos gmath.Vec, direction gmath.Vec, speed float64) *StraightBullet {
+	sb := &StraightBullet{
+		EntityBase: *entity.NewEntityBase(),
 		Pos:        pos,
 		direction:  direction,
 		speed:      speed,

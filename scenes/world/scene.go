@@ -19,11 +19,11 @@ func NewScene() scenes.Scene {
 
 	playerEntity := player.NewPlayerEntity()
 	playerEntity.Pos = camera.ToWorldPos(gmath.Vec{camera.ScreenWidth / 2, camera.ScreenHeight / 2})
-	scene.AddEntity(&playerEntity)
+	scene.AddEntity(playerEntity)
 
 	enemy := enemies.NewEnemy()
 	enemy.Pos = camera.ToWorldPos(gmath.Vec{camera.ScreenWidth / 2, 1 * camera.PixelsPerUnit})
-	scene.AddEntity(&enemy)
+	scene.AddEntity(enemy)
 
 	return &scene
 }

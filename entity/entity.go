@@ -44,6 +44,7 @@ type Entity interface {
 	IsActive() bool
 	Dispose()
 	TimeScale() float64
+	SetTimeScale(scale float64)
 }
 
 type EntityBase struct {
@@ -68,4 +69,8 @@ func (eb *EntityBase) Dispose() {
 
 func (eb *EntityBase) TimeScale() float64 {
 	return eb.timeScale
+}
+
+func (eb *EntityBase) SetTimeScale(scale float64) {
+	eb.timeScale = scale
 }

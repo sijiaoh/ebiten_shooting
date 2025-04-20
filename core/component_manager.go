@@ -7,7 +7,9 @@ type componentManager struct {
 }
 
 func newComponentManager() *componentManager {
-	return &componentManager{}
+	return &componentManager{
+		components: make(map[reflect.Type]Component),
+	}
 }
 
 func (cm *componentManager) addComponent(component Component) {

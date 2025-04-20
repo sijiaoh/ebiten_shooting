@@ -14,9 +14,9 @@ package core
 * 	core.ComponentBase
 * }
 *
-* func NewFoo() *Foo {
+* func NewFoo(entity core.Entity) *Foo {
 * 	return &Foo{
-* 		ComponentBase: *core.NewComponentBase(),
+* 		ComponentBase: *core.NewComponentBase(entity),
 * 	}
 * }
 *
@@ -29,7 +29,7 @@ package core
 * func (f *Foo) Update(delta float64) {
 * }
 *
-* func (f *Foo) Draw(dm *DrawerManager) {
+* func (f *Foo) Draw(dm *core.DrawerManager) {
 * }
 *
 * func (f *Foo) OnDisposed() {

@@ -13,16 +13,14 @@ import (
 )
 
 type PlayerEntity struct {
-	core.EntityBase
+	EntityBase
 
-	Pos            gmath.Vec
 	speedPerSecond float64
 }
 
 func NewPlayerEntity() *PlayerEntity {
 	return &PlayerEntity{
-		EntityBase:     *core.NewEntityBase(),
-		Pos:            gmath.Vec{},
+		EntityBase:     *NewEntityBase(),
 		speedPerSecond: 2,
 	}
 }
@@ -42,7 +40,7 @@ func (pe *PlayerEntity) Draw(dm *core.DrawerManager) {
 	dm.AddDrawer(&core.Drawer{
 		Draw: func(screen *ebiten.Image) {
 			size := 0.5 * camera.PixelsPerUnit
-			screenPos := camera.ToScreenPos(pe.Pos)
+			screenPos := camera.ToScreenPos(pe.pos)
 			vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
 		},
 	})
@@ -72,12 +70,12 @@ func (pe *PlayerEntity) move(delta float64) {
 		vec = vec.Mulf(speed)
 	}
 
-	pe.Pos = pe.Pos.Add(vec)
+	pe.pos = pe.pos.Add(vec)
 }
 
 func (pe *PlayerEntity) shoot() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		b := NewStraightBullet(pe.Pos, gmath.Vec{X: 0, Y: -1}, 5)
+		b := NewStraightBullet(pe.pos, gmath.Vec{X: 0, Y: -1}, 5)
 		game.C.Scene.AddEntity(b)
 	}
 }

@@ -3,18 +3,18 @@ package world
 import (
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
-	"github.com/sijiaoh/ebiten_shooting/scenes"
+	"github.com/sijiaoh/ebiten_shooting/core"
 	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities/enemies"
 	"github.com/sijiaoh/ebiten_shooting/scenes/world/entities/player"
 )
 
 type Scene struct {
-	scenes.SceneBase
+	core.SceneBase
 }
 
-func NewScene() scenes.Scene {
+func NewScene() core.Scene {
 	scene := Scene{
-		SceneBase: scenes.NewSceneBase(),
+		SceneBase: core.NewSceneBase(),
 	}
 
 	playerEntity := player.NewPlayerEntity()

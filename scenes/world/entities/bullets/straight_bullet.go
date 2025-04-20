@@ -7,11 +7,11 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
-	"github.com/sijiaoh/ebiten_shooting/entity"
+	"github.com/sijiaoh/ebiten_shooting/core"
 )
 
 type StraightBullet struct {
-	entity.EntityBase
+	core.EntityBase
 
 	Pos       gmath.Vec
 	direction gmath.Vec
@@ -20,7 +20,7 @@ type StraightBullet struct {
 
 func NewStraightBullet(pos gmath.Vec, direction gmath.Vec, speed float64) *StraightBullet {
 	sb := &StraightBullet{
-		EntityBase: *entity.NewEntityBase(),
+		EntityBase: *core.NewEntityBase(),
 		Pos:        pos,
 		direction:  direction,
 		speed:      speed,
@@ -36,8 +36,8 @@ func (sb *StraightBullet) Update(delta float64) {
 	sb.Pos = sb.Pos.Add(sb.direction.Mulf(speed))
 }
 
-func (sb *StraightBullet) Draw(dm *entity.DrawerManager) {
-	dm.AddDrawer(&entity.Drawer{
+func (sb *StraightBullet) Draw(dm *core.DrawerManager) {
+	dm.AddDrawer(&core.Drawer{
 		Draw: func(screen *ebiten.Image) {
 			size := 0.1 * camera.PixelsPerUnit
 			screenPos := camera.ToScreenPos(sb.Pos)

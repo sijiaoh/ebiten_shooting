@@ -1,4 +1,4 @@
-package entity
+package core
 
 type EntityManager struct {
 	entities      []Entity

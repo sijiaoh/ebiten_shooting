@@ -1,9 +1,9 @@
 package game
 
-import "github.com/sijiaoh/ebiten_shooting/scenes"
+import "github.com/sijiaoh/ebiten_shooting/core"
 
 type Context struct {
-	Scene scenes.Scene
+	Scene core.Scene
 }
 
 var C = Context{}

@@ -1,29 +1,28 @@
-package scenes
+package core
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/sijiaoh/ebiten_shooting/entity"
 )
 
 type Scene interface {
-	AddEntity(entity entity.Entity)
+	AddEntity(entity Entity)
 	Update()
 	Draw(screen *ebiten.Image)
 }
 
 type SceneBase struct {
-	entityManager *entity.EntityManager
-	drawerManager *entity.DrawerManager
+	entityManager *EntityManager
+	drawerManager *DrawerManager
 }
 
 func NewSceneBase() SceneBase {
 	return SceneBase{
-		entityManager: entity.NewEntityManager(),
-		drawerManager: entity.NewDrawerManager(),
+		entityManager: NewEntityManager(),
+		drawerManager: NewDrawerManager(),
 	}
 }
 
-func (sb *SceneBase) AddEntity(entity entity.Entity) {
+func (sb *SceneBase) AddEntity(entity Entity) {
 	sb.entityManager.AddEntity(entity)
 }
 

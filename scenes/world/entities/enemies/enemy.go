@@ -7,11 +7,11 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
-	"github.com/sijiaoh/ebiten_shooting/entity"
+	"github.com/sijiaoh/ebiten_shooting/core"
 )
 
 type Enemy struct {
-	entity.EntityBase
+	core.EntityBase
 
 	Pos            gmath.Vec
 	speedPerSecond float64
@@ -19,7 +19,7 @@ type Enemy struct {
 
 func NewEnemy() *Enemy {
 	return &Enemy{
-		EntityBase:     *entity.NewEntityBase(),
+		EntityBase:     *core.NewEntityBase(),
 		speedPerSecond: 1,
 	}
 }
@@ -30,8 +30,8 @@ func (e *Enemy) Init() {
 func (e *Enemy) Update(delta float64) {
 }
 
-func (e *Enemy) Draw(dm *entity.DrawerManager) {
-	dm.AddDrawer(&entity.Drawer{
+func (e *Enemy) Draw(dm *core.DrawerManager) {
+	dm.AddDrawer(&core.Drawer{
 		Draw: func(screen *ebiten.Image) {
 			size := 0.5 * camera.PixelsPerUnit
 			screenPos := camera.ToScreenPos(e.Pos)

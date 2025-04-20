@@ -47,3 +47,7 @@ func (e *Enemy) Draw(dm *core.DrawerManager) {
 
 func (e *Enemy) OnDisposed() {
 }
+
+func (e *Enemy) SpeedPerSecond() float64 {
+	return e.speedPerSecond
+}

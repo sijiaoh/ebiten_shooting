@@ -58,7 +58,10 @@ type ComponentBase struct {
 }
 
 func NewComponentBase(entity Entity) *ComponentBase {
-	return &ComponentBase{Entity: entity}
+	return &ComponentBase{
+		Entity:   entity,
+		isActive: true,
+	}
 }
 
 func (cb *ComponentBase) IsActive() bool {

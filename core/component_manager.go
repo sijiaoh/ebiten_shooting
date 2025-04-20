@@ -58,7 +58,7 @@ func (cm *componentManager) initComponents() {
 }
 
 func (cm *componentManager) removeDisposedComponents() {
-	var activeComponents map[reflect.Type]Component
+	activeComponents := make(map[reflect.Type]Component)
 	for _, component := range cm.components {
 		if component.IsActive() {
 			activeComponents[reflect.TypeOf(component)] = component

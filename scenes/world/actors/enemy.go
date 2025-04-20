@@ -1,4 +1,4 @@
-package entities
+package actors
 
 import (
 	"image/color"
@@ -12,17 +12,17 @@ import (
 )
 
 type Enemy struct {
-	EntityBase
+	ActorBase
 
 	speedPerSecond float64
 }
 
-func NewEnemy(playerEntity *PlayerEntity) *Enemy {
+func NewEnemy(playerActor *PlayerActor) *Enemy {
 	e := &Enemy{
-		EntityBase:     *NewEntityBase(),
+		ActorBase:      *NewActorBase(),
 		speedPerSecond: 1,
 	}
-	e.AddComponent(components.NewFollower(e, playerEntity))
+	e.AddComponent(components.NewFollower(e, playerActor))
 	return e
 }
 

@@ -1,4 +1,4 @@
-package entities
+package actors
 
 import (
 	"image/color"
@@ -11,7 +11,7 @@ import (
 )
 
 type StraightBullet struct {
-	EntityBase
+	ActorBase
 
 	direction gmath.Vec
 	speed     float64
@@ -19,9 +19,9 @@ type StraightBullet struct {
 
 func NewStraightBullet(pos gmath.Vec, direction gmath.Vec, speed float64) *StraightBullet {
 	sb := &StraightBullet{
-		EntityBase: *NewEntityBase(),
-		direction:  direction,
-		speed:      speed,
+		ActorBase: *NewActorBase(),
+		direction: direction,
+		speed:     speed,
 	}
 	sb.pos = pos
 	return sb

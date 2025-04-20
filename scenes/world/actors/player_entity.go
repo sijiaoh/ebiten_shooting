@@ -1,4 +1,4 @@
-package entities
+package actors
 
 import (
 	"image/color"
@@ -12,44 +12,44 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/game"
 )
 
-type PlayerEntity struct {
-	EntityBase
+type PlayerActor struct {
+	ActorBase
 
 	speedPerSecond float64
 }
 
-func NewPlayerEntity() *PlayerEntity {
-	return &PlayerEntity{
-		EntityBase:     *NewEntityBase(),
+func NewPlayerActor() *PlayerActor {
+	return &PlayerActor{
+		ActorBase:      *NewActorBase(),
 		speedPerSecond: 2,
 	}
 }
 
-func (pe *PlayerEntity) Awake() {
+func (pa *PlayerActor) Awake() {
 }
 
-func (pe *PlayerEntity) Init() {
+func (pa *PlayerActor) Init() {
 }
 
-func (pe *PlayerEntity) Update(delta float64) {
-	pe.move(delta)
-	pe.shoot()
+func (pa *PlayerActor) Update(delta float64) {
+	pa.move(delta)
+	pa.shoot()
 }
 
-func (pe *PlayerEntity) Draw(dm *core.DrawerManager) {
+func (pa *PlayerActor) Draw(dm *core.DrawerManager) {
 	dm.AddDrawer(&core.Drawer{
 		Draw: func(screen *ebiten.Image) {
 			size := 0.5 * camera.PixelsPerUnit
-			screenPos := camera.ToScreenPos(pe.pos)
+			screenPos := camera.ToScreenPos(pa.pos)
 			vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
 		},
 	})
 }
 
-func (pe *PlayerEntity) OnDisposed() {
+func (pa *PlayerActor) OnDisposed() {
 }
 
-func (pe *PlayerEntity) move(delta float64) {
+func (pa *PlayerActor) move(delta float64) {
 	vec := gmath.Vec{}
 	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
 		vec.Y -= 1
@@ -66,16 +66,16 @@ func (pe *PlayerEntity) move(delta float64) {
 
 	if vec.LenSquared() > 0 {
 		vec = vec.Normalized()
-		speed := pe.speedPerSecond * delta
+		speed := pa.speedPerSecond * delta
 		vec = vec.Mulf(speed)
 	}
 
-	pe.pos = pe.pos.Add(vec)
+	pa.pos = pa.pos.Add(vec)
 }
 
-func (pe *PlayerEntity) shoot() {
+func (pa *PlayerActor) shoot() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		b := NewStraightBullet(pe.pos, gmath.Vec{X: 0, Y: -1}, 5)
+		b := NewStraightBullet(pa.pos, gmath.Vec{X: 0, Y: -1}, 5)
 		game.C.Scene.AddEntity(b)
 	}
 }

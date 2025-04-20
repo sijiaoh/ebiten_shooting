@@ -11,27 +11,27 @@ type Scene interface {
 }
 
 type SceneBase struct {
-	entityManager *EntityManager
+	entityManager *entityManager
 	drawerManager *DrawerManager
 }
 
 func NewSceneBase() SceneBase {
 	return SceneBase{
-		entityManager: NewEntityManager(),
-		drawerManager: NewDrawerManager(),
+		entityManager: newEntityManager(),
+		drawerManager: newDrawerManager(),
 	}
 }
 
 func (sb *SceneBase) AddEntity(entity Entity) {
-	sb.entityManager.AddEntity(entity)
+	sb.entityManager.addEntity(entity)
 }
 
 func (sb *SceneBase) Update() {
-	sb.entityManager.Update()
+	sb.entityManager.update()
 }
 
 func (sb *SceneBase) Draw(screen *ebiten.Image) {
-	sb.entityManager.Draw(sb.drawerManager)
-	sb.drawerManager.Draw(screen)
-	sb.drawerManager.ClearDrawers()
+	sb.entityManager.draw(sb.drawerManager)
+	sb.drawerManager.draw(screen)
+	sb.drawerManager.clearDrawers()
 }

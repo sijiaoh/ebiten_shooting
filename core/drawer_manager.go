@@ -10,7 +10,7 @@ type DrawerManager struct {
 	drawers []*Drawer
 }
 
-func NewDrawerManager() *DrawerManager {
+func newDrawerManager() *DrawerManager {
 	return &DrawerManager{}
 }
 
@@ -18,11 +18,11 @@ func (dm *DrawerManager) AddDrawer(drawer *Drawer) {
 	dm.drawers = append(dm.drawers, drawer)
 }
 
-func (dm *DrawerManager) ClearDrawers() {
+func (dm *DrawerManager) clearDrawers() {
 	dm.drawers = dm.drawers[:0]
 }
 
-func (dm *DrawerManager) Draw(screen *ebiten.Image) {
+func (dm *DrawerManager) draw(screen *ebiten.Image) {
 	sort.SliceStable(dm.drawers, func(i, j int) bool {
 		if dm.drawers[i].Layer == dm.drawers[j].Layer {
 			return dm.drawers[i].Order < dm.drawers[j].Order

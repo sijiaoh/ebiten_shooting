@@ -51,22 +51,22 @@ type Entity interface {
 	SetTimeScale(scale float64)
 
 	AddComponent(component Component)
-	UpdateComponents(delta float64)
-	DrawComponents(drawManager *DrawerManager)
-	DisposeComponents()
+	updateComponents(delta float64)
+	drawComponents(drawManager *DrawerManager)
+	disposeComponents()
 }
 
 type EntityBase struct {
 	isActive         bool
 	timeScale        float64
-	componentManager ComponentManager
+	componentManager componentManager
 }
 
 func NewEntityBase() *EntityBase {
 	return &EntityBase{
 		isActive:         true,
 		timeScale:        1,
-		componentManager: *NewComponentManager(),
+		componentManager: *newComponentManager(),
 	}
 }
 
@@ -87,17 +87,17 @@ func (eb *EntityBase) SetTimeScale(scale float64) {
 }
 
 func (eb *EntityBase) AddComponent(component Component) {
-	eb.componentManager.AddComponent(component)
+	eb.componentManager.addComponent(component)
 }
 
-func (eb *EntityBase) UpdateComponents(delta float64) {
-	eb.componentManager.Update(delta)
+func (eb *EntityBase) updateComponents(delta float64) {
+	eb.componentManager.update(delta)
 }
 
-func (eb *EntityBase) DrawComponents(dm *DrawerManager) {
-	eb.componentManager.Draw(dm)
+func (eb *EntityBase) drawComponents(dm *DrawerManager) {
+	eb.componentManager.draw(dm)
 }
 
-func (eb *EntityBase) DisposeComponents() {
-	eb.componentManager.Dispose()
+func (eb *EntityBase) disposeComponents() {
+	eb.componentManager.dispose()
 }

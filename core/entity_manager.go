@@ -1,41 +1,41 @@
 package core
 
-type EntityManager struct {
+type entityManager struct {
 	entities      []Entity
 	addedEntities []Entity
 }
 
-func NewEntityManager() *EntityManager {
-	return &EntityManager{}
+func newEntityManager() *entityManager {
+	return &entityManager{}
 }
 
-func (em *EntityManager) AddEntity(entity Entity) {
+func (em *entityManager) addEntity(entity Entity) {
 	em.addedEntities = append(em.addedEntities, entity)
 	entity.Awake()
 }
 
-func (em *EntityManager) Update() {
+func (em *entityManager) update() {
 	em.initEntities()
 
 	for _, entity := range em.entities {
 		if entity.IsActive() {
 			delta := 1.0 / 60 * entity.TimeScale()
 			entity.Update(delta)
-			entity.UpdateComponents(delta)
+			entity.updateComponents(delta)
 		}
 	}
 
 	em.removeDisposedEntities()
 }
 
-func (em *EntityManager) Draw(dm *DrawerManager) {
+func (em *entityManager) draw(dm *DrawerManager) {
 	for _, entity := range em.entities {
 		entity.Draw(dm)
-		entity.DrawComponents(dm)
+		entity.drawComponents(dm)
 	}
 }
 
-func (em *EntityManager) initEntities() {
+func (em *entityManager) initEntities() {
 	for _, entity := range em.addedEntities {
 		entity.Init()
 	}
@@ -43,14 +43,14 @@ func (em *EntityManager) initEntities() {
 	em.addedEntities = make([]Entity, 0)
 }
 
-func (em *EntityManager) removeDisposedEntities() {
+func (em *entityManager) removeDisposedEntities() {
 	var activeEntities []Entity
 	for _, entity := range em.entities {
 		if entity.IsActive() {
 			activeEntities = append(activeEntities, entity)
 		} else {
 			entity.OnDisposed()
-			entity.DisposeComponents()
+			entity.disposeComponents()
 		}
 	}
 	em.entities = activeEntities

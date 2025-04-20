@@ -2,21 +2,21 @@ package core
 
 import "reflect"
 
-type ComponentManager struct {
+type componentManager struct {
 	components      map[reflect.Type]Component
 	addedComponents []Component
 }
 
-func NewComponentManager() *ComponentManager {
-	return &ComponentManager{}
+func newComponentManager() *componentManager {
+	return &componentManager{}
 }
 
-func (cm *ComponentManager) AddComponent(component Component) {
+func (cm *componentManager) addComponent(component Component) {
 	cm.addedComponents = append(cm.addedComponents, component)
 	component.Awake()
 }
 
-func (cm *ComponentManager) Update(delta float64) {
+func (cm *componentManager) update(delta float64) {
 	cm.initComponents()
 
 	for _, component := range cm.components {
@@ -28,19 +28,19 @@ func (cm *ComponentManager) Update(delta float64) {
 	cm.removeDisposedComponents()
 }
 
-func (cm *ComponentManager) Draw(dm *DrawerManager) {
+func (cm *componentManager) draw(dm *DrawerManager) {
 	for _, component := range cm.components {
 		component.Draw(dm)
 	}
 }
 
-func (cm *ComponentManager) Dispose() {
+func (cm *componentManager) dispose() {
 	for _, component := range cm.components {
 		component.Dispose()
 	}
 }
 
-func (cm *ComponentManager) initComponents() {
+func (cm *componentManager) initComponents() {
 	for _, component := range cm.addedComponents {
 		component.Init()
 		cm.components[reflect.TypeOf(component)] = component
@@ -48,7 +48,7 @@ func (cm *ComponentManager) initComponents() {
 	cm.addedComponents = make([]Component, 0)
 }
 
-func (cm *ComponentManager) removeDisposedComponents() {
+func (cm *componentManager) removeDisposedComponents() {
 	var activeComponents map[reflect.Type]Component
 	for _, component := range cm.components {
 		if component.IsActive() {

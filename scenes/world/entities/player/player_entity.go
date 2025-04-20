@@ -28,6 +28,9 @@ func NewPlayerEntity() *PlayerEntity {
 	}
 }
 
+func (pe *PlayerEntity) Awake() {
+}
+
 func (pe *PlayerEntity) Init() {
 }
 

@@ -20,6 +20,9 @@ package core
 * 	}
 * }
 *
+* func (f *Foo) Awake() {
+* }
+*
 * func (f *Foo) Init() {
 * }
 *
@@ -34,6 +37,7 @@ package core
  */
 type Entity interface {
 	// ライフサイクルメソッド
+	Awake()
 	Init()
 	Update(delta float64)
 	Draw(drawManager *DrawerManager)

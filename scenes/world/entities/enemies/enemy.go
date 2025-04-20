@@ -24,6 +24,9 @@ func NewEnemy() *Enemy {
 	}
 }
 
+func (e *Enemy) Awake() {
+}
+
 func (e *Enemy) Init() {
 }
 

@@ -28,6 +28,9 @@ func NewStraightBullet(pos gmath.Vec, direction gmath.Vec, speed float64) *Strai
 	return sb
 }
 
+func (sb *StraightBullet) Awake() {
+}
+
 func (sb *StraightBullet) Init() {
 }
 

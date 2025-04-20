@@ -11,6 +11,7 @@ func NewEntityManager() *EntityManager {
 
 func (em *EntityManager) AddEntity(entity Entity) {
 	em.addedEntities = append(em.addedEntities, entity)
+	entity.Awake()
 }
 
 func (em *EntityManager) Update() {

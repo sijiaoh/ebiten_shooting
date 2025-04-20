@@ -8,6 +8,7 @@ import (
 	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/core"
+	"github.com/sijiaoh/ebiten_shooting/scenes/world/components"
 )
 
 type Enemy struct {
@@ -21,7 +22,7 @@ func NewEnemy(playerEntity *PlayerEntity) *Enemy {
 		EntityBase:     *NewEntityBase(),
 		speedPerSecond: 1,
 	}
-	e.AddComponent(NewFollower(e, playerEntity))
+	e.AddComponent(components.NewFollower(e, playerEntity))
 	return e
 }
 

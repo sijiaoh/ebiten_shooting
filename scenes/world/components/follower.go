@@ -1,21 +1,29 @@
-package entities
+package components
 
 import (
+	"github.com/quasilyte/gmath"
 	"github.com/sijiaoh/ebiten_shooting/core"
 )
 
 type FollowerEntity interface {
-	Entity
+	core.Entity
+
+	Pos() gmath.Vec
+	SetPos(pos gmath.Vec)
 	SpeedPerSecond() float64
+}
+
+type FollowerTarget interface {
+	Pos() gmath.Vec
 }
 
 type Follower struct {
 	core.ComponentBase
 	entity FollowerEntity
-	target Entity
+	target FollowerTarget
 }
 
-func NewFollower(entity FollowerEntity, target Entity) *Follower {
+func NewFollower(entity FollowerEntity, target FollowerTarget) *Follower {
 	return &Follower{
 		ComponentBase: *core.NewComponentBase(entity),
 		entity:        entity,

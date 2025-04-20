@@ -19,7 +19,9 @@ func (em *EntityManager) Update() {
 
 	for _, entity := range em.entities {
 		if entity.IsActive() {
-			entity.Update(1.0 / 60 * entity.TimeScale())
+			delta := 1.0 / 60 * entity.TimeScale()
+			entity.Update(delta)
+			entity.UpdateComponents(delta)
 		}
 	}
 
@@ -29,6 +31,7 @@ func (em *EntityManager) Update() {
 func (em *EntityManager) Draw(dm *DrawerManager) {
 	for _, entity := range em.entities {
 		entity.Draw(dm)
+		entity.DrawComponents(dm)
 	}
 }
 
@@ -41,13 +44,14 @@ func (em *EntityManager) initEntities() {
 }
 
 func (em *EntityManager) removeDisposedEntities() {
-	var aliveEntities []Entity
+	var activeEntities []Entity
 	for _, entity := range em.entities {
 		if entity.IsActive() {
-			aliveEntities = append(aliveEntities, entity)
+			activeEntities = append(activeEntities, entity)
 		} else {
 			entity.OnDisposed()
+			entity.DisposeComponents()
 		}
 	}
-	em.entities = aliveEntities
+	em.entities = activeEntities
 }

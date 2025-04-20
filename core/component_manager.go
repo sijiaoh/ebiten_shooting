@@ -15,6 +15,13 @@ func (cm *componentManager) addComponent(component Component) {
 	component.Awake()
 }
 
+func (cm *componentManager) getComponent(componentType reflect.Type) Component {
+	if component, ok := cm.components[componentType]; ok {
+		return component
+	}
+	return nil
+}
+
 func (cm *componentManager) update(delta float64) {
 	cm.initComponents()
 

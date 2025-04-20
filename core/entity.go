@@ -1,5 +1,7 @@
 package core
 
+import "reflect"
+
 /*
 * テンプレート
 *
@@ -54,6 +56,7 @@ type Entity interface {
 	setIsInited(isInited bool)
 
 	AddComponent(component Component)
+	GetComponent(componentType reflect.Type) Component
 	updateComponents(delta float64)
 	drawComponents(drawManager *DrawerManager)
 	disposeComponents()
@@ -100,6 +103,10 @@ func (eb *EntityBase) setIsInited(isInited bool) {
 
 func (eb *EntityBase) AddComponent(component Component) {
 	eb.componentManager.addComponent(component)
+}
+
+func (eb *EntityBase) GetComponent(componentType reflect.Type) Component {
+	return eb.componentManager.getComponent(componentType)
 }
 
 func (eb *EntityBase) updateComponents(delta float64) {

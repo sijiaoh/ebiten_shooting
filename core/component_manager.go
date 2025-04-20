@@ -3,8 +3,7 @@ package core
 import "reflect"
 
 type componentManager struct {
-	components      map[reflect.Type]Component
-	addedComponents []Component
+	components map[reflect.Type]Component
 }
 
 func newComponentManager() *componentManager {
@@ -12,7 +11,7 @@ func newComponentManager() *componentManager {
 }
 
 func (cm *componentManager) addComponent(component Component) {
-	cm.addedComponents = append(cm.addedComponents, component)
+	cm.components[reflect.TypeOf(component)] = component
 	component.Awake()
 }
 
@@ -41,11 +40,12 @@ func (cm *componentManager) dispose() {
 }
 
 func (cm *componentManager) initComponents() {
-	for _, component := range cm.addedComponents {
-		component.Init()
-		cm.components[reflect.TypeOf(component)] = component
+	for _, component := range cm.components {
+		if !component.getIsInited() {
+			component.Init()
+			component.setIsInited(true)
+		}
 	}
-	cm.addedComponents = make([]Component, 0)
 }
 
 func (cm *componentManager) removeDisposedComponents() {

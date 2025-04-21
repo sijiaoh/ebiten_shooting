@@ -37,13 +37,13 @@ func (pa *PlayerActor) Update(delta float64) {
 }
 
 func (pa *PlayerActor) Draw(dm *core.DrawerManager) {
-	dm.AddDrawer(&core.Drawer{
-		Draw: func(screen *ebiten.Image) {
-			size := 0.5 * camera.PixelsPerUnit
-			screenPos := camera.ToScreenPos(pa.pos)
-			vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
-		},
-	})
+	drawer := dm.NewDrawer()
+	drawer.Draw = func(screen *ebiten.Image) {
+		size := 0.5 * camera.PixelsPerUnit
+		screenPos := camera.ToScreenPos(pa.pos)
+		vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2.0), color.White, false)
+	}
+	dm.AddDrawer(drawer)
 }
 
 func (pa *PlayerActor) OnDisposed() {

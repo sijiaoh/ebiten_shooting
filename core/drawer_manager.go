@@ -2,19 +2,33 @@ package core
 
 import (
 	"sort"
+	"sync"
 
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
 type DrawerManager struct {
-	drawers []*Drawer
+	pool    sync.Pool
+	drawers []*drawer
 }
 
 func newDrawerManager() *DrawerManager {
-	return &DrawerManager{}
+	return &DrawerManager{
+		pool: sync.Pool{
+			New: func() interface{} {
+				return &drawer{}
+			},
+		},
+	}
 }
 
-func (dm *DrawerManager) AddDrawer(drawer *Drawer) {
+func (dm *DrawerManager) NewDrawer() *drawer {
+	drawer := dm.pool.New().(*drawer)
+	drawer.reset()
+	return drawer
+}
+
+func (dm *DrawerManager) AddDrawer(drawer *drawer) {
 	dm.drawers = append(dm.drawers, drawer)
 }
 

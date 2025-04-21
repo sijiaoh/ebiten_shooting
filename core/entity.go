@@ -38,14 +38,14 @@ import "reflect"
 * }
  */
 type Entity interface {
-	// ライフサイクルメソッド
+	// Lifecycle methods
 	Awake()
 	Init()
 	Update(delta float64)
 	Draw(drawManager *DrawerManager)
 	OnDisposed()
 
-	// 以下はEntityBaseに実装済み
+	// Implemented by ComponentBase
 
 	IsActive() bool
 	Dispose()

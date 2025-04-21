@@ -36,7 +36,7 @@ package core
 * }
  */
 type Component interface {
-	// ライフサイクルメソッド
+	// Lifecycle methods
 	Awake()
 	Init()
 	Update(delta float64)

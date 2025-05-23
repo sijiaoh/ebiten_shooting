@@ -3,10 +3,7 @@ package actors
 import (
 	"image/color"
 
-	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/quasilyte/gmath"
-	"github.com/sijiaoh/ebiten_shooting/camera"
 	"github.com/sijiaoh/ebiten_shooting/core"
 )
 
@@ -40,11 +37,7 @@ func (sb *StraightBullet) Update(delta float64) {
 
 func (sb *StraightBullet) Draw(dm *core.DrawerManager) {
 	drawer := dm.NewDrawer()
-	drawer.Draw = func(screen *ebiten.Image) {
-		size := 0.1 * camera.PixelsPerUnit
-		screenPos := camera.ToScreenPos(sb.pos)
-		vector.DrawFilledCircle(screen, float32(screenPos.X), float32(screenPos.Y), float32(size/2), color.RGBA{R: 255, G: 255, B: 0, A: 255}, false)
-	}
+	drawer.DrawCircle(sb.pos, 0.1, color.RGBA{R: 255, G: 255, B: 0, A: 255})
 	dm.AddDrawer(drawer)
 }
 

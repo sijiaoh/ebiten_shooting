@@ -33,6 +33,9 @@ func (dm *DrawerManager) AddDrawer(drawer *drawer) {
 }
 
 func (dm *DrawerManager) clearDrawers() {
+	for _, drawer := range dm.drawers {
+		dm.pool.Put(drawer)
+	}
 	dm.drawers = dm.drawers[:0]
 }
 

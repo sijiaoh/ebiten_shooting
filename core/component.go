@@ -21,18 +21,23 @@ package core
 * }
 *
 * func (f *Foo) Awake() {
+*   f.ComponentBase.Awake()
 * }
 *
 * func (f *Foo) Init() {
+*   f.ComponentBase.Init()
 * }
 *
 * func (f *Foo) Update(delta float64) {
+*   f.ComponentBase.Update(delta)
 * }
 *
 * func (f *Foo) Draw(dm *core.DrawerManager) {
+*   f.ComponentBase.Draw(dm)
 * }
 *
 * func (f *Foo) OnDisposed() {
+*   f.ComponentBase.OnDisposed()
 * }
  */
 type Component interface {
@@ -63,6 +68,16 @@ func NewComponentBase(entity Entity) *ComponentBase {
 		isActive: true,
 	}
 }
+
+func (cb *ComponentBase) Awake() {}
+
+func (cb *ComponentBase) Init() {}
+
+func (cb *ComponentBase) Update(delta float64) {}
+
+func (cb *ComponentBase) Draw(dm *DrawerManager) {}
+
+func (cb *ComponentBase) OnDisposed() {}
 
 func (cb *ComponentBase) IsActive() bool {
 	return cb.isActive

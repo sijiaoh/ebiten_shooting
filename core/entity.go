@@ -23,18 +23,23 @@ import "reflect"
 * }
 *
 * func (f *Foo) Awake() {
+*   f.EntityBase.Awake()
 * }
 *
 * func (f *Foo) Init() {
+*   f.EntityBase.Init()
 * }
 *
 * func (f *Foo) Update(delta float64) {
+*   f.EntityBase.Update(delta)
 * }
 *
 * func (f *Foo) Draw(dm *DrawerManager) {
+*   f.EntityBase.Draw(dm)
 * }
 *
 * func (f *Foo) OnDisposed() {
+*   f.EntityBase.OnDisposed()
 * }
  */
 type Entity interface {
@@ -76,6 +81,16 @@ func NewEntityBase() *EntityBase {
 		componentManager: *newComponentManager(),
 	}
 }
+
+func (eb *EntityBase) Awake() {}
+
+func (eb *EntityBase) Init() {}
+
+func (eb *EntityBase) Update(delta float64) {}
+
+func (eb *EntityBase) Draw(dm *DrawerManager) {}
+
+func (eb *EntityBase) OnDisposed() {}
 
 func (eb *EntityBase) IsActive() bool {
 	return eb.isActive

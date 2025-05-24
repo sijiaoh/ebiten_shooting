@@ -31,13 +31,9 @@ func NewFollower(entity FollowerEntity, target FollowerTarget) *Follower {
 	}
 }
 
-func (f *Follower) Awake() {
-}
-
-func (f *Follower) Init() {
-}
-
 func (f *Follower) Update(delta float64) {
+	f.ComponentBase.Update(delta)
+
 	targetPos := f.target.Pos()
 	speed := f.entity.SpeedPerSecond()
 
@@ -46,10 +42,4 @@ func (f *Follower) Update(delta float64) {
 	vector = vector.Mulf(speed * delta)
 
 	f.entity.SetPos(f.entity.Pos().Add(vector))
-}
-
-func (f *Follower) Draw(dm *core.DrawerManager) {
-}
-
-func (f *Follower) OnDisposed() {
 }

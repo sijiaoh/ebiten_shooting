@@ -23,24 +23,19 @@ func NewPlayerActor() *PlayerActor {
 	}
 }
 
-func (pa *PlayerActor) Awake() {
-}
-
-func (pa *PlayerActor) Init() {
-}
-
 func (pa *PlayerActor) Update(delta float64) {
+	pa.ActorBase.Update(delta)
+
 	pa.move(delta)
 	pa.shoot()
 }
 
 func (pa *PlayerActor) Draw(dm *core.DrawerManager) {
+	pa.ActorBase.Draw(dm)
+
 	drawer := dm.NewDrawer()
 	drawer.DrawCircle(pa.pos, 0.5, color.White)
 	dm.AddDrawer(drawer)
-}
-
-func (pa *PlayerActor) OnDisposed() {
 }
 
 func (pa *PlayerActor) move(delta float64) {

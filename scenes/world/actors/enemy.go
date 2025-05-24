@@ -23,22 +23,12 @@ func NewEnemy(playerActor *PlayerActor) *Enemy {
 	return e
 }
 
-func (e *Enemy) Awake() {
-}
-
-func (e *Enemy) Init() {
-}
-
-func (e *Enemy) Update(delta float64) {
-}
-
 func (e *Enemy) Draw(dm *core.DrawerManager) {
+	e.ActorBase.Draw(dm)
+
 	drawer := dm.NewDrawer()
 	drawer.DrawRect(e.pos, gmath.Vec{X: 0.5, Y: 0.5}, color.RGBA{255, 0, 0, 255})
 	dm.AddDrawer(drawer)
-}
-
-func (e *Enemy) OnDisposed() {
 }
 
 func (e *Enemy) SpeedPerSecond() float64 {

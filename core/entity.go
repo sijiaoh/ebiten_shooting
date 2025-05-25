@@ -3,6 +3,11 @@ package core
 import "reflect"
 
 /*
+* Entityは複数のComponentと子Entityから構成される、最も基本となるオブジェクト
+*
+* Entityは作成後一度だけEntityツリーに追加する必要がある
+* それはEntityManagerにaddEntityするか、既存のEntityにaddChildrenすることで可能である
+*
 * テンプレート
 *
 * package foo

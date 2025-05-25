@@ -66,6 +66,7 @@ type Entity interface {
 	AddChild(entity Entity)
 	setParent(entity Entity)
 	addChild(entity Entity)
+	setChildren(entities []Entity)
 
 	AddComponent(component Component)
 	GetComponent(componentType reflect.Type) Component
@@ -155,6 +156,10 @@ func (eb *EntityBase) setParent(entity Entity) {
 
 func (eb *EntityBase) addChild(entity Entity) {
 	eb.children = append(eb.children, entity)
+}
+
+func (eb *EntityBase) setChildren(entities []Entity) {
+	eb.children = entities
 }
 
 func (eb *EntityBase) AddComponent(component Component) {

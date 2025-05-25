@@ -9,6 +9,9 @@ import (
 	"github.com/sijiaoh/ebiten_shooting/camera"
 )
 
+// 意図した順番で描画を行うための仕組み
+// EntityのDraw内では直接描画を行わず、drawerの生成を行う
+// drawerは指定したLayerやOrderに基づいてソートされてから描画する
 type drawer struct {
 	Layer int
 	Order float64

@@ -62,7 +62,6 @@ type Entity interface {
 
 	Parent() Entity
 	Children() []Entity
-	SetParent(entity Entity)
 	AddChild(entity Entity)
 	setParent(entity Entity)
 	addChild(entity Entity)
@@ -138,11 +137,6 @@ func (eb *EntityBase) Parent() Entity {
 
 func (eb *EntityBase) Children() []Entity {
 	return eb.children
-}
-
-func (eb *EntityBase) SetParent(entity Entity) {
-	eb.setParent(entity)
-	entity.addChild(eb)
 }
 
 func (eb *EntityBase) AddChild(entity Entity) {

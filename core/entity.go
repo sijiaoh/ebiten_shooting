@@ -60,6 +60,13 @@ type Entity interface {
 	getIsInited() bool
 	setIsInited(isInited bool)
 
+	Parent() Entity
+	Children() []Entity
+	SetParent(entity Entity)
+	AddChild(entity Entity)
+	setParent(entity Entity)
+	addChild(entity Entity)
+
 	AddComponent(component Component)
 	GetComponent(componentType reflect.Type) Component
 	updateComponents(delta float64)
@@ -68,16 +75,24 @@ type Entity interface {
 }
 
 type EntityBase struct {
-	isActive         bool
-	timeScale        float64
-	isInited         bool
+	isActive  bool
+	timeScale float64
+	isInited  bool
+
+	parent   Entity
+	children []Entity
+
 	componentManager componentManager
 }
 
 func NewEntityBase() *EntityBase {
 	return &EntityBase{
-		isActive:         true,
-		timeScale:        1,
+		isActive:  true,
+		timeScale: 1,
+
+		parent:   nil,
+		children: make([]Entity, 0),
+
 		componentManager: *newComponentManager(),
 	}
 }
@@ -114,6 +129,32 @@ func (eb *EntityBase) getIsInited() bool {
 
 func (eb *EntityBase) setIsInited(isInited bool) {
 	eb.isInited = isInited
+}
+
+func (eb *EntityBase) Parent() Entity {
+	return eb.parent
+}
+
+func (eb *EntityBase) Children() []Entity {
+	return eb.children
+}
+
+func (eb *EntityBase) SetParent(entity Entity) {
+	eb.setParent(entity)
+	entity.addChild(eb)
+}
+
+func (eb *EntityBase) AddChild(entity Entity) {
+	entity.setParent(eb)
+	eb.addChild(entity)
+}
+
+func (eb *EntityBase) setParent(entity Entity) {
+	eb.parent = entity
+}
+
+func (eb *EntityBase) addChild(entity Entity) {
+	eb.children = append(eb.children, entity)
 }
 
 func (eb *EntityBase) AddComponent(component Component) {

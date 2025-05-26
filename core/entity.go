@@ -147,6 +147,7 @@ func (eb *EntityBase) Children() []Entity {
 func (eb *EntityBase) AddChild(entity Entity) {
 	entity.setParent(eb)
 	eb.addChild(entity)
+	entity.Awake()
 }
 
 func (eb *EntityBase) setParent(entity Entity) {

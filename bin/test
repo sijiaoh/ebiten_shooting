@@ -1,7 +1,9 @@
 #!/bin/bash -eu
 
-Xvfb :99 -screen 0 1024x768x24 >/dev/null 2>&1 &
-XVFB_PID=$!
-trap "kill $XVFB_PID" EXIT
+if type "Xvfb" >/dev/null 2>&1; then
+  Xvfb :99 -screen 0 1024x768x24 >/dev/null 2>&1 &
+  XVFB_PID=$!
+  trap "kill ${XVFB_PID}" EXIT
+fi
 
 DISPLAY=:99 go test ./...
